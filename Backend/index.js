@@ -9,11 +9,7 @@ const login = require("./controllers/loginController");
 const app = express();
 app.use(
   cors({
-    origin: [
-      "https://lms-frontend-iota-sepia.vercel.app/",
-      "https://lms-beta-jet.vercel.app/",
-    ],
-
+    origin: ["https://temp-lms-virid.vercel.app/"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
