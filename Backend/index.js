@@ -9,7 +9,7 @@ const login = require("./controllers/loginController");
 const app = express();
 app.use(
   cors({
-    origin: ["https://temp-lms-virid.vercel.app/"],
+    origin: ["https://temp-lms-virid.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
