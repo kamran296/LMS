@@ -1,0 +1,52 @@
+#navbar{
+    
+    background-color: black;
+}
+#icon{
+    color: white;;
+
+}
+#drawerid{
+    background-color: #FF6636;
+}
+.sidebar{
+    background-color: black;
+    /* display: none; */
+}
+.navDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navDiv img{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+.listIcon{
+    display: none;
+}
+.listItem:hover{
+    background-color: #FF6636;
+}
+.sideBarList{
+    /* display: none; */
+    background-color: black !important;
+    color: white !important;
+}
+.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper {
+    background-color: black !important;
+    color: white !important;
+
+}
+.MuiDrawer-paper {
+    background-color: black !important;
+    color: white !important;
+
+}
+@media (min-width: 0px)
+{
+    .css-2dum1v-MuiDrawer-docked .MuiDrawer-paper {
+   background-color: black;
+}
+}

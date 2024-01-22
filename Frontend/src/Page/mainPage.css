@@ -1,0 +1,58 @@
+.batchTable,
+.courseTable,
+.studentDetailTable,
+.admissionStatusTable {
+  background-color: #fff1f1;
+  border-radius: 12px;
+}
+.stuAdmForm,
+.batchForm,
+.createCourseForm,
+.teacherregForm {
+  padding: 1rem;
+  background-color: #fff1f1;
+  border-radius: 12px;
+}
+.flexDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.inputFields {
+  margin: 0.5rem;
+  width: 100%;
+}
+th {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
+}
+.radioField {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 0.5rem;
+}
+
+.dobDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+#stuSubBtn,
+#BatchBtn,
+#addCourseBtn,
+#teacherSubBtn
+{
+  background-color: #ff6636;
+  margin: 1rem;
+  width: 15rem;
+  font-weight: 600;
+  font-size: 1rem;
+  height: 3rem;
+}
+.btnBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
