@@ -29,7 +29,7 @@ export default function StudentDetail() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-avhw.onrender.com/api/v1/student/getallstudents"
+        "https://lms-backend-hl4h.onrender.com/api/v1/student/getallstudents"
       );
       const data = await response.data;
       setData(data);

@@ -39,7 +39,7 @@ export default function Batch() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-avhw.onrender.com/api/v1/course/getallcourse"
+        "https://lms-backend-hl4h.onrender.com/api/v1/course/getallcourse"
       );
       setCourses(response.data);
     } catch (error) {
@@ -50,7 +50,7 @@ export default function Batch() {
   const fetchTeachers = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-avhw.onrender.com/api/v1/teacher/getallteachers"
+        "https://lms-backend-hl4h.onrender.com/api/v1/teacher/getallteachers"
       );
       setTeachers(response.data);
     } catch (error) {
@@ -74,7 +74,7 @@ export default function Batch() {
       const selectedTeacher = findTeacherByName(teacher);
       console.log(selectedTeacher);
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/batch/create-batch",
+        "https://lms-backend-hl4h.onrender.com/api/v1/batch/create-batch",
         {
           batchname: batchName,
           course: selectedCourse,

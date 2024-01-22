@@ -41,7 +41,7 @@ export default function TeacherRegistration() {
 
     try {
       const response = await fetch(
-        "https://lms-backend-avhw.onrender.com/api/v1/teacher/create-teacher",
+        "https://lms-backend-hl4h.onrender.com/api/v1/teacher/create-teacher",
         {
           method: "POST",
           headers: {

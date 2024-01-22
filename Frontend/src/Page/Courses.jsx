@@ -34,7 +34,7 @@ export default function Courses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-avhw.onrender.com/api/v1/course/getallcourse"
+        "https://lms-backend-hl4h.onrender.com/api/v1/course/getallcourse"
         // {
         //   headers: {
         //     authToken: token, // Include the token in the request headers

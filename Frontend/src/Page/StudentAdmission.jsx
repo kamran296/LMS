@@ -41,7 +41,7 @@ export default function StudentAdmission() {
   const fetchCourseId = async (courseName) => {
     try {
       const response = await fetch(
-        `https://lms-backend-avhw.onrender.com/api/v1/course/${courseName}`,
+        `https://lms-backend-hl4h.onrender.com/api/v1/course/${courseName}`,
         {
           method: "GET",
         }
@@ -105,7 +105,7 @@ export default function StudentAdmission() {
     const fetchCourses = async () => {
       try {
         const response = await fetch(
-          "https://lms-backend-avhw.onrender.com/api/v1/course/getallcourse",
+          "https://lms-backend-hl4h.onrender.com/api/v1/course/getallcourse",
           {
             method: "GET",
           }
@@ -131,7 +131,7 @@ export default function StudentAdmission() {
 
     try {
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/admissions/create-admission",
+        "https://lms-backend-hl4h.onrender.com/api/v1/admissions/create-admission",
         formData, // Pass form data directly, axios will handle JSON.stringify
         {
           headers: {

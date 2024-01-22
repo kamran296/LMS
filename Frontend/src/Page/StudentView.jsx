@@ -46,7 +46,7 @@ const StudentView = () => {
   const fetchAttendanceData = async () => {
     try {
       const response = await axios.get(
-        `https://lms-backend-avhw.onrender.com/api/v1/attendance/${studentId}`,
+        `https://lms-backend-hl4h.onrender.com/api/v1/attendance/${studentId}`,
         {
           headers: {
             authToken: authToken,
