@@ -63,7 +63,7 @@ const StudentView = () => {
   const fetchDetails = async (req, res) => {
     try {
       const response = await axios.get(
-        `https://lms-backend-ozij.onrender.com/api/v1/student/view/${studentId}`
+        `https://lms-backend-hl4h.onrender.com/api/v1/student/view/${studentId}`
       );
       const data = await response.data;
       setStudentDetails(data);
