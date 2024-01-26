@@ -47,6 +47,12 @@ export default function CreateCourse() {
           },
         }
       );
+      if (response.status === 201) {
+        alert("course created successfully!!");
+      } else {
+        // Handle error, e.g., show an error message
+        console.error("Error registering course:", response.statusText);
+      }
       // Handle the response as needed (e.g., show success message, redirect, etc.)
       console.log("Course added successfully:", response.data);
 
