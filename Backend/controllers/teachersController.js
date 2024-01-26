@@ -34,7 +34,7 @@ exports.createTeacher = async (req, res) => {
     }
     const newTeacher = new Teacher({ name, email, mobile, gender });
     await newTeacher.save();
-    res.status(201).json(newTeacher);
+    res.status(201).json({ teacher: newTeacher, success: true });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

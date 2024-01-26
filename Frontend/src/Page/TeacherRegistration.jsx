@@ -56,6 +56,7 @@ export default function TeacherRegistration() {
         const data = await response.json();
         // Handle success, e.g., show a success message
         console.log("Teacher registered successfully:", data);
+        alert("Teacher Added Successfully!!");
       } else {
         // Handle error, e.g., show an error message
         console.error("Error registering teacher:", response.statusText);

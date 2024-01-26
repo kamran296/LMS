@@ -133,9 +133,10 @@ const StudentAdmitModal = ({
       setFormData({ ...formData, [name]: value });
     }
   };
-
+  const [batch, setBatch] = useState("");
   const handleBatchChange = (e) => {
     const selectedBatchId = e.target.value;
+    setBatch(selectedBatchId);
     BatchData(selectedBatchId);
   };
 
@@ -188,7 +189,7 @@ const StudentAdmitModal = ({
           {/* Dropdown for batches */}
           <select
             name="batch"
-            value={formData.batch}
+            value={batch ? batch.batchname : ""}
             onChange={handleBatchChange}
           >
             <option value="">Select Batch</option>

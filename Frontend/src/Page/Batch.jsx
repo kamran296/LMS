@@ -86,7 +86,13 @@ export default function Batch() {
           },
         }
       );
-      console.log("Batch created successfully:", response.data);
+      if (response.status === 201) {
+        alert("Batch created successfully!!");
+      } else {
+        // Handle error, e.g., show an error message
+        console.error("Error registering teacher:", response.statusText);
+      }
+      // console.log("Batch created successfully:", response.data);
     } catch (error) {
       console.error("Error creating batch:", error);
     }
