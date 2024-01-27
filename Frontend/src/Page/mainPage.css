@@ -56,3 +56,14 @@ th {
   justify-content: center;
   align-items: center;
 }
+.studentViewBox{
+  margin: 4rem;
+}
+.modalBox{
+ margin: 4rem;
+}
+.flexModal{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -62,6 +62,7 @@ export default function CreateCourse() {
       setDuration("");
       setFees("");
     } catch (err) {
+      alert("All fields are mandatory");
       console.log(err);
     }
   };

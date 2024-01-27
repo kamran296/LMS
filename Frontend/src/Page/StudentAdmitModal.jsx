@@ -3,9 +3,25 @@ import axios from "axios";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+// import Button from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
 
+import NativeSelect from "@mui/material/NativeSelect";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
+import "./mainPage.css";
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 const StudentAdmitModal = ({
   show,
   handleClose,
@@ -171,95 +187,118 @@ const StudentAdmitModal = ({
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} className="modalBox">
       <Modal.Header closeButton>
         <Modal.Title>Admit Student</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form encType="multipart/form-data" onSubmit={handleSubmit}>
-          {/* Main form fields */}
-          {/* <input
-            type="text"
-            name="applicationId"
-            placeholder={formData.applicationId}
-            value={applicationId}
-            readOnly
-            // onChange={(e) => handleInputChange(e)}
-          /> */}
-          {/* Dropdown for batches */}
-          <select
-            name="batch"
-            value={batch ? batch.batchname : ""}
-            onChange={handleBatchChange}
-          >
-            <option value="">Select Batch</option>
-            {batches.map((batch) => (
-              <option key={batch._id} value={batch._id}>
-                {batch.batchname}
-              </option>
+          <div className="flexModal">
+            <NativeSelect
+              style={{ margin: "0.5rem", width: "45%" }}
+              name="batch"
+              value={batch ? batch.batchname : ""}
+              onChange={handleBatchChange}
+            >
+              <option value="">Select Batch</option>
+              {batches.map((batch) => (
+                <option key={batch._id} value={batch._id}>
+                  {batch.batchname}
+                </option>
+              ))}
+            </NativeSelect>
+            <TextField
+              style={{ margin: "0.5rem", width: "50%" }}
+              id="outlined-basic"
+              variant="outlined"
+              size="small"
+              type="number"
+              name="roll_no"
+              label="Roll No"
+              value={formData.roll_no}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </div>
+          <div className="flexModal">
+            {formData.fees.map((fee, index) => (
+              <div key={index}>
+                {/* Add fields for fee details */}
+                <TextField
+                  style={{ margin: "0.5rem", width: "45%" }}
+                  id="outlined-basic"
+                  variant="outlined"
+                  size="small"
+                  type="text"
+                  name={`fees.${index}.amount`}
+                  label="Amount"
+                  value={fee.amount}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+                <TextField
+                  style={{ margin: "0.5rem", width: "45%" }}
+                  id="outlined-basic"
+                  variant="outlined"
+                  size="small"
+                  type="text"
+                  name={`fees.${index}.paidamount`}
+                  label="Paid Amount"
+                  value={fee.paidamount}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+                <TextField
+                  style={{ margin: "0.5rem", width: "45%" }}
+                  id="outlined-basic"
+                  variant="outlined"
+                  size="small"
+                  type="date"
+                  name={`fees.${index}.date`}
+                  value={fee.date}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+
+                <TextField
+                  style={{ margin: "0.5rem", width: "45%" }}
+                  id="outlined-basic"
+                  variant="outlined"
+                  size="small"
+                  type="text"
+                  name={`fees.${index}.status`}
+                  label="Status"
+                  value={fee.status}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+
+                <Button
+                  style={{ margin: "0.5rem", width: "45%" }}
+                  component="label"
+                  variant="contained"
+                  size="small"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Upload file
+                  <VisuallyHiddenInput
+                    type="file"
+                    name={`fees.${index}.image`}
+                    onChange={(e) => handleFileUpload(e, index)}
+                  />
+                </Button>
+
+                {index === formData.fees.length - 1 && (
+                  <Button
+                    style={{ margin: "0.5rem", width: "45%" }}
+                    variant="outlined"
+                    onClick={addFee}
+                  >
+                    Add fee
+                  </Button>
+                )}
+              </div>
             ))}
-          </select>
-
-          <input
-            type="text"
-            name="roll_no"
-            placeholder="Roll No"
-            value={formData.roll_no}
-            onChange={(e) => handleInputChange(e)}
-          />
-
-          {/* Fee details */}
-          {formData.fees.map((fee, index) => (
-            <div key={index}>
-              {/* Add fields for fee details */}
-              <input
-                type="text"
-                name={`fees.${index}.amount`}
-                placeholder="Amount"
-                value={fee.amount}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="text"
-                name={`fees.${index}.paidamount`}
-                placeholder="Paid Amount"
-                value={fee.paidamount}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="date"
-                name={`fees.${index}.date`}
-                placeholder="Date"
-                value={fee.date}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="text"
-                name={`fees.${index}.status`}
-                placeholder="Status"
-                value={fee.status}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="file"
-                name={`fees.${index}.image`}
-                onChange={(e) => handleFileUpload(e, index)}
-              />
-
-              {index === formData.fees.length - 1 && (
-                <button type="button" onClick={addFee}>
-                  Add Fee
-                </button>
-              )}
-            </div>
-          ))}
+          </div>
 
           {/* <button type="submit">Submit</button> */}
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleSubmit}>
+            <Button variant="contained" onClick={handleSubmit}>
               Admit Student
             </Button>
           </Modal.Footer>

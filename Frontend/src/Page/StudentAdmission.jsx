@@ -125,6 +125,7 @@ export default function StudentAdmission() {
     fetchCourses();
   }, []);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
@@ -154,6 +155,7 @@ export default function StudentAdmission() {
         // Handle other errors as needed
       }
     } catch (error) {
+      alert("All fields are mandatory")
       console.error("Error submitting form:", error);
     }
   };
@@ -361,6 +363,7 @@ export default function StudentAdmission() {
             <h3>Course Details</h3>
             <div className="radioField">
               <Form.Select
+                required
                 name="courseInterested"
                 value={courseSelected}
                 onChange={handleChange}
@@ -382,8 +385,8 @@ export default function StudentAdmission() {
             </div>
 
             <div className="btnBox">
-              <Button id="stuSubBtn" type="submit" variant="success">
-                ADD COURSE
+              <Button id="stuSubBtn" type="submit" variant="success" >
+                ADD STUDENT
               </Button>
             </div>
           </form>
