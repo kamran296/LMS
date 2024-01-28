@@ -17,9 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import CategoryIcon from '@mui/icons-material/Category';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import StudentIcon from "@mui/icons-material/Person";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AdmissionStatus from "@mui/icons-material/Airplay";
 import StudentDetail from "@mui/icons-material/Topic";
@@ -181,38 +179,7 @@ export default function SideBar() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem
-            className="listItem"
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/studentadmission");
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: "white",
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <StudentIcon />
-              </ListItemIcon>
-
-              <ListItemText
-                primary="Student Admission"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
+       
           <ListItem
             className="listItem"
             disablePadding
@@ -240,7 +207,7 @@ export default function SideBar() {
               </ListItemIcon>
 
               <ListItemText
-                primary="Admission Status"
+                primary="Enquiry"
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
@@ -272,7 +239,7 @@ export default function SideBar() {
               </ListItemIcon>
 
               <ListItemText
-                primary="Student Detail"
+                primary="All Students"
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
@@ -335,70 +302,11 @@ export default function SideBar() {
                 <Courses />
               </ListItemIcon>
 
-              <ListItemText primary="Courses" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="All Courses" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem
-            className="listItem"
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/createCourse");
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: "white",
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <AddCourses />
-              </ListItemIcon>
-
-              <ListItemText
-                primary="Add Courses"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            className="listItem"
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/batch");
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: "white",
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <CategoryIcon />
-              </ListItemIcon>
-
-              <ListItemText primary="Batch" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+     
+        
           <ListItem
             className="listItem"
             disablePadding
@@ -426,7 +334,7 @@ export default function SideBar() {
               </ListItemIcon>
 
               <ListItemText
-                primary="Batch List"
+                primary="All Batches"
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>

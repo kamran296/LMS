@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SideBar from "../Component/SideBar";
 import Box from "@mui/material/Box";
+import StudentIcon from "@mui/icons-material/Person";
 import "./mainPage.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -61,7 +62,18 @@ export default function AdmissionStatus() {
       <Box sx={{ display: "flex" }}>
         <SideBar />
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-          <h1>Admission Status </h1>
+          <div className="headingFlex">
+            <h1>All Enquries </h1>
+            <Button
+              style={{ backgroundColor: "#ff6636" }}
+              onClick={() => {
+                navigate("/studentadmission");
+              }}
+            >
+              <StudentIcon></StudentIcon>
+              Add Student Enquiry
+            </Button>
+          </div>
           <div>
             <MDBTable className="admissionStatusTable">
               <MDBTableHead>
@@ -81,8 +93,6 @@ export default function AdmissionStatus() {
 
                   <th scope="col">Course Name</th>
 
-                  <th scope="col">Course Duration</th>
-                  <th scope="col">Course Fees</th>
                   <th scope="col">Status</th>
                   <th scope="col">Admit</th>
                 </tr>
@@ -103,8 +113,6 @@ export default function AdmissionStatus() {
 
                     <td>{item.course && item.course.coursename}</td>
 
-                    <td>{item.course && item.course.duration}</td>
-                    <td>{item.course && item.course.fees}</td>
                     <td>{item.status}</td>
                     <td>
                       <Button

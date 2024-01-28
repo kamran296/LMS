@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import SideBar from "../Component/SideBar";
 import Box from "@mui/material/Box";
+import StudentIcon from "@mui/icons-material/Person";
 import "./mainPage.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -53,7 +54,18 @@ export default function BatchList() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-        <h1>Batch List Section</h1>
+        <div className="headingFlex">
+          <h1>All Batches</h1>
+          <Button
+            style={{ backgroundColor: "#ff6636" }}
+            onClick={() => {
+              navigate("/batch");
+            }}
+          >
+            <StudentIcon></StudentIcon>
+            Create New Batch
+          </Button>
+        </div>
         <MDBTable className="batchTable">
           <MDBTableHead>
             <tr>
