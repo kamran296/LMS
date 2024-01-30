@@ -57,7 +57,11 @@ th {
   align-items: center;
 }
 .studentViewBox{
-  margin: 4rem;
+   background-color: #fff1f1;
+  margin: 6rem;
+  width: 100%;
+  border-radius: 10px;
+  padding: 1rem;
 }
 .modalBox{
  margin: 4rem;
@@ -69,6 +73,18 @@ th {
 }
 .headingFlex{
   margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#tabId1, #tabId2{
+  background: none;
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+.flexViewBox{
   display: flex;
   justify-content: space-between;
   align-items: center;

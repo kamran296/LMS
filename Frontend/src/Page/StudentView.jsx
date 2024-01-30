@@ -9,12 +9,17 @@ import {
   MDBTabsPane,
   MDBContainer,
 } from "mdb-react-ui-kit";
+import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
+import DownloadIcon from "@mui/icons-material/Download";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "react-bootstrap/Button";
+import "./mainPage.css";
 const StudentView = () => {
   const { pathname } = useLocation();
 
@@ -151,77 +156,205 @@ const StudentView = () => {
           <MDBTabs pills className="mb-3 ">
             <MDBTabsItem>
               <MDBTabsLink
+                id="tabId1"
                 onClick={() => handleBasicClick("tab1")}
                 active={basicActive === "tab1"}
               >
-                Details
+                Student Details
               </MDBTabsLink>
             </MDBTabsItem>
             <MDBTabsItem>
               <MDBTabsLink
+                id="tabId2"
                 onClick={() => handleBasicClick("tab2")}
                 active={basicActive === "tab2"}
               >
                 Update Fees
               </MDBTabsLink>
             </MDBTabsItem>
-          
           </MDBTabs>
 
           <MDBTabsContent>
             <MDBTabsPane open={basicActive === "tab1"}>
               <MDBContainer
                 breakpoint="lg"
-                style={{ backgroundColor: "lightblue" }}
+                style={{ backgroundColor: "#fff1f1" }}
               >
                 {Object.keys(studentDetails).length > 0 && (
                   <div>
-                    <p>
-                      <strong>Full Name:</strong>{" "}
-                      {studentDetails.applicationId.fullname}
-                    </p>
-                    <p>
-                      <strong>Email:</strong>{" "}
-                      {studentDetails.applicationId.email}
-                    </p>
-                    <p>
-                      <strong>Mobile:</strong>{" "}
-                      {studentDetails.applicationId.mobile}
-                    </p>
-                    <h3>Fees Information</h3>
+                    <h3>Basic Details</h3>
+                    <div>
+                      <div className="flexViewBox">
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Full Name"
+                          defaultValue={studentDetails.applicationId.fullname}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Email"
+                          defaultValue={studentDetails.applicationId.email}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Mobile"
+                          defaultValue={studentDetails.applicationId.mobile}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Gender"
+                          defaultValue={studentDetails.applicationId.gender}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                      </div>
+                      <div className="">
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Aadhar Card"
+                          defaultValue={studentDetails.applicationId.adharcard}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Date of Birth"
+                          defaultValue={studentDetails.applicationId.dob}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Address"
+                          defaultValue={studentDetails.applicationId.address}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          multiline={4}
+                        />
+                      </div>
+                    </div>
+                    <hr />
+                    <h3>Parents Details</h3>
+                    <div className="">
+                      <TextField
+                        style={{ margin: "0.5rem" }}
+                        size="small"
+                        id="outlined-read-only-input"
+                        label="Parent Name"
+                        defaultValue={studentDetails.applicationId.parentname}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                      <TextField
+                        style={{ margin: "0.5rem" }}
+                        size="small"
+                        id="outlined-read-only-input"
+                        label="Parent Occupation"
+                        defaultValue={
+                          studentDetails.applicationId.parentoccupation
+                        }
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                      <TextField
+                        style={{ margin: "0.5rem" }}
+                        size="small"
+                        id="outlined-read-only-input"
+                        label="Parent Phone"
+                        defaultValue={studentDetails.applicationId.parentphone}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    </div>
+                    <hr />
+                    <h3>Fees Details</h3>
                     {studentDetails.fees.map((fee) => (
-                      <div key={fee._id}>
-                        <p>
-                          <strong>Amount:</strong> {fee.amount}
-                        </p>
-                        <p>
-                          <strong>Paid Amount:</strong> {fee.paidamount}
-                        </p>
-                        <p>
-                          <strong>Date:</strong>{" "}
-                          {new Date(fee.date).toLocaleDateString()}
-                        </p>
-                        <p>
-                          <strong>Status:</strong> {fee.status}
-                        </p>
-                        {fee.image && (
-                          <img
-                            src={fee.image}
-                            alt="Fee Receipt"
-                            download
-                            style={{ maxWidth: "100%" }}
-                          />
-                        )}
-                        <button
-                          onClick={() =>
-                            handleDownloadImage(fee.image, "Receipt")
-                          }
-                        >
-                          Download
-                        </button>
-                        <button onClick={() => handlePrintImage(fee.image)}>
-                          Print
-                        </button>
+                      <div style={{ display: "flex" }} key={fee._id}>
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Amount"
+                          defaultValue={fee.amount}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Date"
+                          defaultValue={new Date(fee.date).toLocaleDateString()}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Status"
+                          defaultValue={fee.status}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <div className="btnBox">
+                          <Button
+                            style={{
+                              backgroundColor: "black",
+                              margin: "0.3rem",
+                            }}
+                            onClick={() =>
+                              handleDownloadImage(fee.image, "Receipt")
+                            }
+                          >
+                            <DownloadIcon></DownloadIcon> 
+                          </Button>
+                          <Button
+                            style={{
+                              backgroundColor: "black",
+                              margin: "0.3rem",
+                            }}
+                            onClick={() => handlePrintImage(fee.image)}
+                          >
+                           <LocalPrintshopIcon></LocalPrintshopIcon>
+                          </Button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -283,7 +416,6 @@ const StudentView = () => {
                 </form>
               </MDBContainer>
             </MDBTabsPane>
-         
           </MDBTabsContent>
         </div>
       </Box>

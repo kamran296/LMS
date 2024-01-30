@@ -78,16 +78,11 @@ export default function AdmissionStatus() {
             <MDBTable className="admissionStatusTable">
               <MDBTableHead>
                 <tr>
-                  {/* {admissionsData.length > 0 &&
-                    Object.keys(admissionsData[0].education).map((key) => (
-                      <th key={key} scope="col">
-                        Education {key}
-                      </th>
-                    ))} */}
+               
                   <th scope="col">Full Name</th>
                   <th scope="col">Email</th>
 
-                  {/* <th scope="col">Parent Phone</th> */}
+                
 
                   <th scope="col">Mobile</th>
 
