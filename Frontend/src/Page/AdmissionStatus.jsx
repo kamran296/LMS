@@ -67,17 +67,7 @@ export default function AdmissionStatus() {
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
           <div className="headingFlex">
             <h1>All Enquries </h1>
-            <div className="inputFields">
-              <TextField
-                id="dob"
-                name="personalInfo.dob"
-                // value={formData.personalInfo.dob}
-                onChange={(e) => setSearch(e.target.value)}
-                label="Search"
-                type="text"
-                fullWidth
-              />
-            </div>
+
             <Button
               style={{ backgroundColor: "#ff6636" }}
               onClick={() => {
@@ -87,6 +77,17 @@ export default function AdmissionStatus() {
               <StudentIcon></StudentIcon>
               Add Student Enquiry
             </Button>
+          </div>
+          <div className="inputFields">
+            <TextField
+              style={{ width: "50%", backgroundColor: "#fff1f1" }}
+              id="dob"
+              name="personalInfo.dob"
+              onChange={(e) => setSearch(e.target.value)}
+              label="🔍Search"
+              type="text"
+              fullWidth
+            />
           </div>
           <div>
             <MDBTable className="admissionStatusTable">
