@@ -13,9 +13,7 @@ exports.getAllAdmissions = async (req, res) => {
 // Controller to get a specific admission by ID
 exports.getAdmissionById = async (req, res) => {
   try {
-    const admission = await Admission.findById(req.params.admissionId).populate(
-      "course"
-    );
+    const admission = await Admission.findById(req.params.admissionId);
     if (!admission) {
       return res.status(404).json({ message: "Admission not found" });
     }
@@ -64,7 +62,7 @@ exports.updateAdmission = async (req, res) => {
       admissionId,
       updateFields,
       { new: true }
-    ).populate("course");
+    );
 
     if (!admission) {
       return res.status(404).json({ message: "Admission not found" });
