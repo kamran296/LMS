@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import Button from "react-bootstrap/Button";
+import { TextField } from "@mui/material";
 import StudentAdmitModal from "./StudentAdmitModal";
 export default function AdmissionStatus() {
   const { pathname } = useLocation();
@@ -58,6 +59,7 @@ export default function AdmissionStatus() {
     setShowModal(false);
     setSelectedStudentId(null);
   };
+  const [search, setSearch] = useState("");
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -65,6 +67,17 @@ export default function AdmissionStatus() {
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
           <div className="headingFlex">
             <h1>All Enquries </h1>
+            <div className="inputFields">
+              <TextField
+                id="dob"
+                name="personalInfo.dob"
+                // value={formData.personalInfo.dob}
+                onChange={(e) => setSearch(e.target.value)}
+                label="Search"
+                type="text"
+                fullWidth
+              />
+            </div>
             <Button
               style={{ backgroundColor: "#ff6636" }}
               onClick={() => {
@@ -91,45 +104,53 @@ export default function AdmissionStatus() {
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
-                {admissionsData.map((item, index) => (
-                  <tr key={index}>
-                    {/* {item.education &&
+                {admissionsData
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.personalInfo.firstName
+                          .toLowerCase()
+                          .includes(search);
+                  })
+                  .map((item, index) => (
+                    <tr key={index}>
+                      {/* {item.education &&
                       Object.values(item.education).map((value, subIndex) => (
                         <td key={subIndex}>{value}</td>
                       ))} */}
-                    <td>
-                      {item.personalInfo.firstName}{" "}
-                      {item.personalInfo.middleName}{" "}
-                      {item.personalInfo.lastName}
-                    </td>
-                    <td>{item.personalInfo.email}</td>
+                      <td>
+                        {item.personalInfo.firstName}{" "}
+                        {item.personalInfo.middleName}{" "}
+                        {item.personalInfo.lastName}
+                      </td>
+                      <td>{item.personalInfo.email}</td>
 
-                    {/* <td>{item.parentphone}</td> */}
+                      {/* <td>{item.parentphone}</td> */}
 
-                    <td>{item.personalInfo.phone}</td>
+                      <td>{item.personalInfo.phone}</td>
 
-                    <td>{item.branch.course}</td>
+                      <td>{item.branch.course}</td>
 
-                    <td>{item.parent.phone}</td>
-                    <td>
-                      <Button
-                        variant="success"
-                        onClick={() => handleAdmitButtonClick(item._id)}
-                        disabled={item.status === "Admitted"}
-                        style={{
-                          backgroundColor:
-                            item.status === "Admitted" ? "green" : "red",
-                          cursor:
-                            item.status === "Admitted"
-                              ? "not-allowed"
-                              : "pointer",
-                        }}
-                      >
-                        {item.status === "Admitted" ? "Admitted" : "Admit"}
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                      <td>{item.parent.phone}</td>
+                      <td>
+                        <Button
+                          variant="success"
+                          onClick={() => handleAdmitButtonClick(item._id)}
+                          disabled={item.status === "Admitted"}
+                          style={{
+                            backgroundColor:
+                              item.status === "Admitted" ? "green" : "red",
+                            cursor:
+                              item.status === "Admitted"
+                                ? "not-allowed"
+                                : "pointer",
+                          }}
+                        >
+                          {item.status === "Admitted" ? "Admitted" : "Admit"}
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
               </MDBTableBody>
             </MDBTable>
           </div>
