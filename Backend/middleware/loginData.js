@@ -17,7 +17,7 @@ const loginData = (req, res, next) => {
       res.status(404).json("error in data");
     }
     req.user = data.user;
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (error) {
     console.log(error);

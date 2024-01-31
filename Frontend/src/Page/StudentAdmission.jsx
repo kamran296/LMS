@@ -451,7 +451,7 @@ export default function StudentAdmission() {
               <h3>Education Details </h3>
               <div className="flexDiv">
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="sscDegree"
                   name="education.ssc.degree"
                   value={formData.education.ssc.degree}
@@ -461,7 +461,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="sscPercentage"
                   name="education.ssc.percentage"
                   value={formData.education.ssc.percentage}
@@ -472,7 +472,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="sscYearOfPass"
                   name="education.ssc.yearOfPass"
                   value={formData.education.ssc.yearOfPass}
@@ -482,7 +482,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="sscUniversity"
                   name="education.ssc.university"
                   value={formData.education.ssc.university}
@@ -494,7 +494,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="hscDegree"
                   name="education.hsc.degree"
                   value={formData.education.hsc.degree}
@@ -505,7 +505,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="hscPercentage"
                   name="education.hsc.percentage"
                   value={formData.education.hsc.percentage}
@@ -515,7 +515,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="hscYearOfPass"
                   name="education.hsc.yearOfPass"
                   value={formData.education.hsc.yearOfPass}
@@ -526,7 +526,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="hscUniversity"
                   name="education.hsc.university"
                   value={formData.education.hsc.university}
@@ -539,7 +539,7 @@ export default function StudentAdmission() {
 
               <div className="flexDiv">
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="graduationDegree"
                   name="education.graduation.degree"
                   value={formData.education.graduation.degree}
@@ -550,7 +550,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="graduationPercentage"
                   name="education.graduation.percentage"
                   value={formData.education.graduation.percentage}
@@ -561,7 +561,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="graduationYearOfPass"
                   name="education.graduation.yearOfPass"
                   value={formData.education.graduation.yearOfPass}
@@ -572,7 +572,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="graduationSubject"
                   name="education.graduation.subject"
                   value={formData.education.graduation.subject}
@@ -584,7 +584,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="graduationUniversity"
                   name="education.graduation.university"
                   value={formData.education.graduation.university}
@@ -595,7 +595,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="postGraduationDegree"
                   name="education.postGraduation.degree"
                   value={formData.education.postGraduation.degree}
@@ -606,7 +606,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="postGraduationPercentage"
                   name="education.postGraduation.percentage"
                   value={formData.education.postGraduation.percentage}
@@ -616,7 +616,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="postGraduationYearOfPass"
                   name="education.postGraduation.yearOfPass"
                   value={formData.education.postGraduation.yearOfPass}
@@ -629,7 +629,7 @@ export default function StudentAdmission() {
 
               <div className="flexDiv">
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="postGraduationSubject"
                   name="education.postGraduation.subject"
                   value={formData.education.postGraduation.subject}
@@ -640,7 +640,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="postGraduationUniversity"
                   name="education.postGraduation.university"
                   value={formData.education.postGraduation.university}
@@ -651,7 +651,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="otherQualification"
                   name="education.otherQualification"
                   value={formData.education.otherQualification}
@@ -662,7 +662,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
-                  style={{margin:"0.5rem"}}
+                  style={{ margin: "0.5rem" }}
                   id="hobbies"
                   name="education.hobbies"
                   value={formData.education.hobbies}
