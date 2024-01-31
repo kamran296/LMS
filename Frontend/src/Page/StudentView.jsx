@@ -190,7 +190,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Full Name"
-                          defaultValue={studentDetails.applicationId.fullname}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.firstName
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -201,7 +203,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Email"
-                          defaultValue={studentDetails.applicationId.email}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.email
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -212,7 +216,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Mobile"
-                          defaultValue={studentDetails.applicationId.mobile}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.phone
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -222,7 +228,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Gender"
-                          defaultValue={studentDetails.applicationId.gender}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.gender
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -234,7 +242,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Aadhar Card"
-                          defaultValue={studentDetails.applicationId.adharcard}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.adharcard
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -244,7 +254,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Date of Birth"
-                          defaultValue={studentDetails.applicationId.dob}
+                          defaultValue={
+                            studentDetails.applicationId.personalInfo.dob
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -255,7 +267,9 @@ const StudentView = () => {
                           size="small"
                           id="outlined-read-only-input"
                           label="Address"
-                          defaultValue={studentDetails.applicationId.address}
+                          defaultValue={
+                            studentDetails.applicationId.parent.address
+                          }
                           InputProps={{
                             readOnly: true,
                           }}
@@ -271,7 +285,9 @@ const StudentView = () => {
                         size="small"
                         id="outlined-read-only-input"
                         label="Parent Name"
-                        defaultValue={studentDetails.applicationId.parentname}
+                        defaultValue={
+                          studentDetails.applicationId.parent.firstName
+                        }
                         InputProps={{
                           readOnly: true,
                         }}
@@ -282,7 +298,7 @@ const StudentView = () => {
                         id="outlined-read-only-input"
                         label="Parent Occupation"
                         defaultValue={
-                          studentDetails.applicationId.parentoccupation
+                          studentDetails.applicationId.parent.occupation
                         }
                         InputProps={{
                           readOnly: true,
@@ -293,7 +309,7 @@ const StudentView = () => {
                         size="small"
                         id="outlined-read-only-input"
                         label="Parent Phone"
-                        defaultValue={studentDetails.applicationId.parentphone}
+                        defaultValue={studentDetails.applicationId.parent.phone}
                         InputProps={{
                           readOnly: true,
                         }}
@@ -343,7 +359,7 @@ const StudentView = () => {
                               handleDownloadImage(fee.image, "Receipt")
                             }
                           >
-                            <DownloadIcon></DownloadIcon> 
+                            <DownloadIcon></DownloadIcon>
                           </Button>
                           <Button
                             style={{
@@ -352,7 +368,7 @@ const StudentView = () => {
                             }}
                             onClick={() => handlePrintImage(fee.image)}
                           >
-                           <LocalPrintshopIcon></LocalPrintshopIcon>
+                            <LocalPrintshopIcon></LocalPrintshopIcon>
                           </Button>
                         </div>
                       </div>

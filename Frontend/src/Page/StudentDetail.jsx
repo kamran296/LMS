@@ -69,8 +69,8 @@ export default function StudentDetail() {
                 {/* <th scope="col">Parent Phone</th> */}
                 <th scope="col">Mobile</th>
                 <th scope="col">Course Name</th>
-            
-                <th scope="col">Status</th>
+
+                <th scope="col">Batch</th>
                 <th scope="col">View</th>
               </tr>
             </MDBTableHead>
@@ -81,16 +81,17 @@ export default function StudentDetail() {
                     Object.values(item.applicationId.education).map(
                       (value, subIndex) => <td key={subIndex}>{value}</td>
                     )} */}
-                  <td>{item.applicationId.fullname}</td>
-                  <td>{item.applicationId.email}</td>
-                  {/* <td>{item.applicationId.parentphone}</td> */}
-                  <td>{item.applicationId.mobile}</td>
                   <td>
-                    {item.applicationId.course &&
-                      item.applicationId.course.coursename}
+                    {item.applicationId.personalInfo.firstName}{" "}
+                    {item.applicationId.personalInfo.middleName}{" "}
+                    {item.applicationId.personalInfo.lastName}
                   </td>
-                
-                  <td>{item.applicationId.status}</td>
+                  <td>{item.applicationId.personalInfo.email}</td>
+                  {/* <td>{item.applicationId.parentphone}</td> */}
+                  <td>{item.applicationId.personalInfo.phone}</td>
+                  <td>{item.applicationId.branch.course}</td>
+
+                  <td>{item.batch.batchname}</td>
                   <td>
                     <Button
                       onClick={() => handleViewButtonClick(item._id)}
