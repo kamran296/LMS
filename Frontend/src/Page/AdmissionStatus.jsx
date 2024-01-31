@@ -30,7 +30,7 @@ export default function AdmissionStatus() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://lms-backend-avhw.onrender.com/api/v1/admissions/getalladmissions"
+          "http://localhost:8000/api/v1/admissions/getalladmissions"
         );
         const data = await response.json();
         console.log(data, 123);
