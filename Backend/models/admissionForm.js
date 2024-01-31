@@ -189,6 +189,11 @@ var AdmissionSchema = new mongoose.Schema(
     personalInfo: PersonalSchema,
     parent: ParentSchema,
     education: EducationalSchema,
+    status: {
+      type: String,
+      enum: ["Admitted", "Admit"],
+      default: "Admit",
+    },
   },
   {
     timestamps: true,
