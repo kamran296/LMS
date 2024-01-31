@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import Button from "react-bootstrap/Button";
+import { TextField } from "@mui/material";
 import StudentAdmitModal from "./StudentAdmitModal";
 export default function AdmissionStatus() {
   const { pathname } = useLocation();
@@ -32,6 +33,7 @@ export default function AdmissionStatus() {
           "https://lms-backend-hl4h.onrender.com/api/v1/admissions/getalladmissions"
         );
         const data = await response.json();
+        console.log(data, 123);
         setAdmissionsData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -57,6 +59,7 @@ export default function AdmissionStatus() {
     setShowModal(false);
     setSelectedStudentId(null);
   };
+  const [search, setSearch] = useState("");
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -64,6 +67,17 @@ export default function AdmissionStatus() {
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
           <div className="headingFlex">
             <h1>All Enquries </h1>
+            <div className="inputFields">
+              <TextField
+                id="dob"
+                name="personalInfo.dob"
+                // value={formData.personalInfo.dob}
+                onChange={(e) => setSearch(e.target.value)}
+                label="Search"
+                type="text"
+                fullWidth
+              />
+            </div>
             <Button
               style={{ backgroundColor: "#ff6636" }}
               onClick={() => {
@@ -78,56 +92,65 @@ export default function AdmissionStatus() {
             <MDBTable className="admissionStatusTable">
               <MDBTableHead>
                 <tr>
-               
                   <th scope="col">Full Name</th>
                   <th scope="col">Email</th>
-
-                
 
                   <th scope="col">Mobile</th>
 
                   <th scope="col">Course Name</th>
 
-                  <th scope="col">Status</th>
+                  <th scope="col">Parent phone</th>
                   <th scope="col">Admit</th>
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
-                {admissionsData.map((item, index) => (
-                  <tr key={index}>
-                    {/* {item.education &&
+                {admissionsData
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.personalInfo.firstName
+                          .toLowerCase()
+                          .includes(search);
+                  })
+                  .map((item, index) => (
+                    <tr key={index}>
+                      {/* {item.education &&
                       Object.values(item.education).map((value, subIndex) => (
                         <td key={subIndex}>{value}</td>
                       ))} */}
-                    <td>{item.fullname}</td>
-                    <td>{item.email}</td>
+                      <td>
+                        {item.personalInfo.firstName}{" "}
+                        {item.personalInfo.middleName}{" "}
+                        {item.personalInfo.lastName}
+                      </td>
+                      <td>{item.personalInfo.email}</td>
 
-                    {/* <td>{item.parentphone}</td> */}
+                      {/* <td>{item.parentphone}</td> */}
 
-                    <td>{item.mobile}</td>
+                      <td>{item.personalInfo.phone}</td>
 
-                    <td>{item.course && item.course.coursename}</td>
+                      <td>{item.branch.course}</td>
 
-                    <td>{item.status}</td>
-                    <td>
-                      <Button
-                        variant="success"
-                        onClick={() => handleAdmitButtonClick(item._id)}
-                        disabled={item.status === "Admitted"}
-                        style={{
-                          backgroundColor:
-                            item.status === "Admitted" ? "green" : "red",
-                          cursor:
-                            item.status === "Admitted"
-                              ? "not-allowed"
-                              : "pointer",
-                        }}
-                      >
-                        {item.status === "Admitted" ? "Admitted" : "Admit"}
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                      <td>{item.parent.phone}</td>
+                      <td>
+                        <Button
+                          variant="success"
+                          onClick={() => handleAdmitButtonClick(item._id)}
+                          disabled={item.status === "Admitted"}
+                          style={{
+                            backgroundColor:
+                              item.status === "Admitted" ? "green" : "red",
+                            cursor:
+                              item.status === "Admitted"
+                                ? "not-allowed"
+                                : "pointer",
+                          }}
+                        >
+                          {item.status === "Admitted" ? "Admitted" : "Admit"}
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
               </MDBTableBody>
             </MDBTable>
           </div>

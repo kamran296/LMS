@@ -6,7 +6,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import SearchIcon from "@mui/icons-material/Search";
+
 import Button from "react-bootstrap/Button";
+import { TextField } from "@mui/material";
+
 export default function StudentDetail() {
   const { pathname } = useLocation();
 
@@ -49,11 +53,23 @@ export default function StudentDetail() {
     // Navigate to the StudentView page and pass studentId as part of the URL
     navigate(`/studentview/${studentId}`);
   };
+  const [search, setSearch] = useState("");
   return (
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
         <h1>All Students </h1>
+        <div className="inputFields">
+          <TextField
+            id="dob"
+            name="personalInfo.dob"
+            // value={formData.personalInfo.dob}
+            onChange={(e) => setSearch(e.target.value)}
+            label="Search"
+            type="text"
+            fullWidth
+          />
+        </div>
         <div className="">
           <MDBTable className="studentDetailTable">
             <MDBTableHead>
@@ -69,38 +85,47 @@ export default function StudentDetail() {
                 {/* <th scope="col">Parent Phone</th> */}
                 <th scope="col">Mobile</th>
                 <th scope="col">Course Name</th>
-            
-                <th scope="col">Status</th>
+
+                <th scope="col">Batch</th>
                 <th scope="col">View</th>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {data.map((item, index) => (
-                <tr key={index}>
-                  {/* {item.applicationId.education &&
+              {data
+                .filter((item) => {
+                  return search.toLowerCase() === ""
+                    ? item
+                    : item.applicationId.personalInfo.firstName
+                        .toLowerCase()
+                        .includes(search);
+                })
+                .map((item, index) => (
+                  <tr key={index}>
+                    {/* {item.applicationId.education &&
                     Object.values(item.applicationId.education).map(
                       (value, subIndex) => <td key={subIndex}>{value}</td>
                     )} */}
-                  <td>{item.applicationId.fullname}</td>
-                  <td>{item.applicationId.email}</td>
-                  {/* <td>{item.applicationId.parentphone}</td> */}
-                  <td>{item.applicationId.mobile}</td>
-                  <td>
-                    {item.applicationId.course &&
-                      item.applicationId.course.coursename}
-                  </td>
-                
-                  <td>{item.applicationId.status}</td>
-                  <td>
-                    <Button
-                      onClick={() => handleViewButtonClick(item._id)}
-                      variant="success"
-                    >
-                      View
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+                    <td>
+                      {item.applicationId.personalInfo.firstName}{" "}
+                      {item.applicationId.personalInfo.middleName}{" "}
+                      {item.applicationId.personalInfo.lastName}
+                    </td>
+                    <td>{item.applicationId.personalInfo.email}</td>
+                    {/* <td>{item.applicationId.parentphone}</td> */}
+                    <td>{item.applicationId.personalInfo.phone}</td>
+                    <td>{item.applicationId.branch.course}</td>
+
+                    <td>{item.batch.batchname}</td>
+                    <td>
+                      <Button
+                        onClick={() => handleViewButtonClick(item._id)}
+                        variant="success"
+                      >
+                        View
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
             </MDBTableBody>
           </MDBTable>
         </div>
