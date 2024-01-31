@@ -3,7 +3,13 @@ const Admission = require("../models/admissionForm");
 // Controller to get all admissions
 exports.getAllAdmissions = async (req, res) => {
   try {
-    const admissions = await Admission.find().populate("course");
+    const admissions = await Admission.find().populate({
+      path: "branch",
+      populate: {
+        path: "course",
+        model: "Course",
+      },
+    });
     res.json(admissions);
   } catch (error) {
     res.status(500).json({ message: error.message });
