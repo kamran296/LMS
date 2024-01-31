@@ -94,6 +94,7 @@ export default function Batch() {
       }
       // console.log("Batch created successfully:", response.data);
     } catch (error) {
+      alert("All fields are mandatory")
       console.error("Error creating batch:", error);
     }
   };

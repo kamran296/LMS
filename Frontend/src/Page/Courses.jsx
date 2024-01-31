@@ -6,6 +6,8 @@ import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import StudentIcon from "@mui/icons-material/Person";
+import Button from "react-bootstrap/Button";
 
 export default function Courses() {
   const { pathname } = useLocation();
@@ -43,6 +45,7 @@ export default function Courses() {
       );
       setCourseData(response.data);
     } catch (error) {
+      
       console.error("Error fetching courses:", error);
     }
   };
@@ -51,7 +54,18 @@ export default function Courses() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-        <h1>Courses</h1>
+        <div className="headingFlex">
+          <h1>Courses</h1>
+          <Button
+            style={{ backgroundColor: "#ff6636" }}
+            onClick={() => {
+              navigate("/createcourse");
+            }}
+          >
+            <StudentIcon></StudentIcon>
+            Add Course
+          </Button>
+        </div>
         <MDBTable className="courseTable">
           <MDBTableHead>
             <tr>

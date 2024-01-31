@@ -59,6 +59,7 @@ export default function TeacherRegistration() {
         alert("Teacher Added Successfully!!");
       } else {
         // Handle error, e.g., show an error message
+        alert("All fields are mandatory ")
         console.error("Error registering teacher:", response.statusText);
       }
     } catch (error) {

@@ -53,7 +53,7 @@ export default function StudentDetail() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-        <h1>Student Detail </h1>
+        <h1>All Students </h1>
         <div className="">
           <MDBTable className="studentDetailTable">
             <MDBTableHead>
@@ -69,8 +69,7 @@ export default function StudentDetail() {
                 {/* <th scope="col">Parent Phone</th> */}
                 <th scope="col">Mobile</th>
                 <th scope="col">Course Name</th>
-                <th scope="col">Course Duration</th>
-                <th scope="col">Course Fees</th>
+            
                 <th scope="col">Status</th>
                 <th scope="col">View</th>
               </tr>
@@ -90,14 +89,7 @@ export default function StudentDetail() {
                     {item.applicationId.course &&
                       item.applicationId.course.coursename}
                   </td>
-                  <td>
-                    {item.applicationId.course &&
-                      item.applicationId.course.duration}
-                  </td>
-                  <td>
-                    {item.applicationId.course &&
-                      item.applicationId.course.fees}
-                  </td>
+                
                   <td>{item.applicationId.status}</td>
                   <td>
                     <Button
