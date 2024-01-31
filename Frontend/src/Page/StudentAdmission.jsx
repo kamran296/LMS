@@ -550,7 +550,7 @@ export default function StudentAdmission() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/admissions/create-admission",
+        "https://lms-backend-hl4h.onrender.com/api/v1/admissions/create-admission",
         formData,
         {
           headers: {
