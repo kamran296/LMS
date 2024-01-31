@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import SideBar from "../Component/SideBar";
 import Box from "@mui/material/Box";
+import { TextField } from "@mui/material";
 import StudentIcon from "@mui/icons-material/Person";
 import "./mainPage.css";
 import { useNavigate } from "react-router-dom";
@@ -50,6 +51,8 @@ export default function BatchList() {
 
     fetchData();
   }, []);
+  const [search, setSearch] = useState("");
+
   return (
     <Box sx={{ display: "flex" }}>
       <SideBar />
@@ -65,6 +68,15 @@ export default function BatchList() {
             <StudentIcon></StudentIcon>
             Create New Batch
           </Button>
+        </div>
+        <div className="inputFields">
+          <TextField
+            style={{ width: "50%", backgroundColor: "#fff1f1" }}
+            onChange={(e) => setSearch(e.target.value)}
+            label="🔍Search"
+            type="text"
+            fullWidth
+          />
         </div>
         <MDBTable className="batchTable">
           <MDBTableHead>

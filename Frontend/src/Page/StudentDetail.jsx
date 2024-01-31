@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import SearchIcon from "@mui/icons-material/Search";
 
 import Button from "react-bootstrap/Button";
 import { TextField } from "@mui/material";
@@ -61,15 +60,15 @@ export default function StudentDetail() {
         <h1>All Students </h1>
         <div className="inputFields">
           <TextField
-            id="dob"
-            name="personalInfo.dob"
-            // value={formData.personalInfo.dob}
+            style={{ width: "50%", backgroundColor: "#fff1f1" }}
+            
             onChange={(e) => setSearch(e.target.value)}
-            label="Search"
+            label="🔍Search"
             type="text"
             fullWidth
           />
         </div>
+        
         <div className="">
           <MDBTable className="studentDetailTable">
             <MDBTableHead>

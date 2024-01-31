@@ -4,6 +4,8 @@ import SideBar from "../Component/SideBar";
 import Box from "@mui/material/Box";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import axios from "axios";
+import { TextField } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import StudentIcon from "@mui/icons-material/Person";
@@ -33,6 +35,7 @@ export default function Courses() {
     // Fetch course data from the API
     fetchCourses();
   }, []);
+    const [search, setSearch] = useState("");
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
@@ -45,9 +48,9 @@ export default function Courses() {
       );
       setCourseData(response.data);
     } catch (error) {
-      
       console.error("Error fetching courses:", error);
     }
+  
   };
 
   return (
@@ -66,6 +69,16 @@ export default function Courses() {
             Add Course
           </Button>
         </div>
+        <div className="inputFields">
+          <TextField
+            style={{ width: "50%", backgroundColor: "#fff1f1" }}
+            onChange={(e) => setSearch(e.target.value)}
+            label="🔍Search"
+            type="text"
+            fullWidth
+          />
+        </div>
+
         <MDBTable className="courseTable">
           <MDBTableHead>
             <tr>
@@ -76,6 +89,7 @@ export default function Courses() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
+            
             {courseData.map((course) => (
               <tr key={course._id}>
                 <td>{course.coursename}</td>
