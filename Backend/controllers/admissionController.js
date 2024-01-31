@@ -27,48 +27,29 @@ exports.getAdmissionById = async (req, res) => {
 
 // Controller to create a new admission
 exports.createAdmission = async (req, res) => {
-  const {
-    fullname,
-    email,
-    gender,
-    dob,
-    parentname,
-    parentoccupation,
-    parentphone,
-    adharcard,
-    mobile,
-    address,
-    education,
-    course,
-  } = req.body;
-
   try {
+    // Check if a student with the provided Aadhar card already exists
     const studentExists = await Admission.findOne({
-      adharcard: { $regex: new RegExp(adharcard, "i") },
+      "personalInfo.adharcard": req.body.personalInfo.adharcard,
     });
     if (studentExists) {
-      return res.status(400).json("Student already exists");
+      return res.status(400).json({ message: "Student already exists" });
     }
 
-    const newAdmission = new Admission({
-      fullname,
-      email,
-      gender,
-      dob,
-      parentname,
-      parentoccupation,
-      parentphone,
-      adharcard,
-      mobile,
-      address,
-      education,
-      course,
-    });
+    // Create a new admission instance based on the request body
+    const newAdmission = new Admission(req.body);
 
+    // Save the new admission to the database
     await newAdmission.save();
+
+    // Respond with the newly created admission
     res.status(201).json(newAdmission);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    // Handle errors
+    console.error("Error creating admission:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to create admission", error: error.message });
   }
 };
 
