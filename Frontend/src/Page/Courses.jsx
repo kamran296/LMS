@@ -35,11 +35,11 @@ export default function Courses() {
     // Fetch course data from the API
     fetchCourses();
   }, []);
-    const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-hl4h.onrender.com/api/v1/course/getallcourse"
+        "https://lms-backend-avhw.onrender.com/api/v1/course/getallcourse"
         // {
         //   headers: {
         //     authToken: token, // Include the token in the request headers
@@ -50,7 +50,6 @@ export default function Courses() {
     } catch (error) {
       console.error("Error fetching courses:", error);
     }
-  
   };
 
   return (
@@ -89,7 +88,6 @@ export default function Courses() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            
             {courseData.map((course) => (
               <tr key={course._id}>
                 <td>{course.coursename}</td>

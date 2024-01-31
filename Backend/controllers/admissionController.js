@@ -28,6 +28,7 @@ exports.getAdmissionById = async (req, res) => {
 // Controller to create a new admission
 exports.createAdmission = async (req, res) => {
   try {
+    console.log(req.body);
     // Check if a student with the provided Aadhar card already exists
     const studentExists = await Admission.findOne({
       "personalInfo.adharcard": req.body.personalInfo.adharcard,

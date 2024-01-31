@@ -41,7 +41,7 @@ export default function TeacherRegistration() {
 
     try {
       const response = await fetch(
-        "https://lms-backend-hl4h.onrender.com/api/v1/teacher/create-teacher",
+        "https://lms-backend-avhw.onrender.com/api/v1/teacher/create-teacher",
         {
           method: "POST",
           headers: {
@@ -59,7 +59,7 @@ export default function TeacherRegistration() {
         alert("Teacher Added Successfully!!");
       } else {
         // Handle error, e.g., show an error message
-        alert("All fields are mandatory ")
+        alert("All fields are mandatory ");
         console.error("Error registering teacher:", response.statusText);
       }
     } catch (error) {

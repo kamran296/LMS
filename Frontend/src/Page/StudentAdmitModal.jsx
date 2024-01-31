@@ -37,7 +37,7 @@ const StudentAdmitModal = ({
     const ApplicationData = async (req, res) => {
       try {
         const response = await axios.get(
-          `https://lms-backend-hl4h.onrender.com/api/v1/admissions/${applicationId}`
+          `https://lms-backend-avhw.onrender.com/api/v1/admissions/${applicationId}`
         );
         const data = await response.data;
         // setApplicationData(data);
@@ -56,7 +56,7 @@ const StudentAdmitModal = ({
   const batchOptions = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-hl4h.onrender.com/api/v1/batch/getAllBatches"
+        "https://lms-backend-avhw.onrender.com/api/v1/batch/getAllBatches"
       );
       const data = await response.data;
       console.log(data);
@@ -84,7 +84,7 @@ const StudentAdmitModal = ({
   // function for saving batch data in the student
   const BatchData = async (selectedBatchId) => {
     const response = await axios.get(
-      `https://lms-backend-hl4h.onrender.com/api/v1/batch/${selectedBatchId}`
+      `https://lms-backend-avhw.onrender.com/api/v1/batch/${selectedBatchId}`
     );
     const data = await response.data;
     setBatchData(data);
@@ -164,7 +164,7 @@ const StudentAdmitModal = ({
       // Send form data to the API endpoint
 
       const response = await axios.post(
-        "https://lms-backend-hl4h.onrender.com/api/v1/student/create-student",
+        "https://lms-backend-avhw.onrender.com/api/v1/student/create-student",
         formData
       );
       const status = "Admitted";
@@ -173,7 +173,7 @@ const StudentAdmitModal = ({
 
       if (status === "Admitted") {
         const response = await axios.put(
-          `https://lms-backend-hl4h.onrender.com/api/v1/admissions/${applicationId}`,
+          `https://lms-backend-avhw.onrender.com/api/v1/admissions/${applicationId}`,
           {
             status: "Admitted",
           }
