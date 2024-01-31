@@ -1,406 +1,13 @@
-// import React, { useEffect } from "react";
-// import SideBar from "../Component/SideBar";
-// import Box from "@mui/material/Box";
-// import { useLocation } from "react-router-dom";
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import axios from "axios";
-// import TextField from "@mui/material/TextField";
-// export default function StudentAdmission() {
-//   const { pathname } = useLocation();
-
-//   // Automatically scrolls to top whenever pathname changes
-//   useEffect(() => {
-//     window.scrollTo(0, 0);
-//   }, [pathname]);
-//   const navigate = useNavigate();
-//   const [courseInterested, setcourseInterested] = useState("");
-//   const [formData, setFormData] = useState({
-//     fullname: "",
-//     email: "",
-//     gender: "",
-//     dob: "",
-//     parentname: "",
-//     parentoccupation: "",
-//     parentphone: "",
-//     adharcard: "",
-//     mobile: "",
-//     address: "",
-//     education: {
-//       edu: "",
-//       year: "",
-//     },
-
-//     course: "",
-//   });
-
-//   const authToken = localStorage.getItem("authToken"); // Replace with your actual authToken
-//   const [courseSelected, setCourseSelected] = useState("");
-//   const fetchCourseId = async (courseName) => {
-//     try {
-//       const response = await fetch(
-//         `https://lms-backend-hl4h.onrender.com/api/v1/course/${courseName}`,
-//         {
-//           method: "GET",
-//         }
-//       );
-
-//       if (response.status === 200) {
-//         const courseData = await response.json();
-//         console.log(courseData, 1234);
-//         setFormData((prevData) => ({
-//           ...prevData,
-//           course: {
-//             _id: courseData._id,
-//             coursename: courseData.coursename,
-//             desc: courseData.desc,
-//             duration: courseData.duration,
-//             fees: courseData.fees,
-//             // Add other course fields as needed
-//           },
-//         }));
-//         // setSelectedCourseId(data); // Assuming the course ID is stored in the "course_id" field
-//         // setFormData.course = data;
-//         // console.log(formData.course);
-//       } else {
-//         console.error("Error fetching course ID:", response.statusText);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching course ID:", error);
-//     }
-//   };
-//   const handleChange = async (e) => {
-//     const { name, value } = e.target;
-
-//     if (name === "courseInterested") {
-//       const val = await fetchCourseId(value);
-//       console.log(value);
-//       setCourseSelected(val);
-//     }
-
-//     if (name.startsWith("education.")) {
-//       const educationField = name.split(".")[1];
-//       setFormData((prevData) => ({
-//         ...prevData,
-//         education: {
-//           ...prevData.education,
-//           [educationField]: value,
-//         },
-//       }));
-//     } else {
-//       setFormData((prevData) => ({
-//         ...prevData,
-//         [name]: value,
-//       }));
-//     }
-//   };
-
-//   const [courseOptions, setCourseOptions] = useState([]);
-//   useEffect(() => {
-//     if (!localStorage.getItem("authToken")) {
-//       navigate("/");
-//     }
-//     const fetchCourses = async () => {
-//       try {
-//         const response = await fetch(
-//           "https://lms-backend-hl4h.onrender.com/api/v1/course/getallcourse",
-//           {
-//             method: "GET",
-//           }
-//         );
-
-//         if (response.status === 200) {
-//           const data = await response.json();
-//           setCourseOptions(data.map((course) => course.coursename));
-//         } else {
-//           console.error("Error fetching courses:", response.statusText);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching courses:", error);
-//       }
-//     };
-
-//     fetchCourses();
-//   }, []);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     console.log("Form Data:", formData);
-
-//     try {
-//       const response = await axios.post(
-//         "https://lms-backend-hl4h.onrender.com/api/v1/admissions/create-admission",
-//         formData, // Pass form data directly, axios will handle JSON.stringify
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//             authToken: `${authToken}`,
-//           },
-//         }
-//       );
-
-//       if (response.status === 201) {
-//         const data = response.data;
-//         alert("Admission created successfully");
-//         // Optionally, you can reset the form or perform other actions after successful submission
-//       } else if (response.status === 400) {
-//         const errorData = response.data;
-//         console.error("Error: Student already exists", errorData.message);
-//         // Handle the case where the student already exists
-//       } else {
-//         console.error("Error creating admission:", response.statusText);
-//         // Handle other errors as needed
-//       }
-//     } catch (error) {
-//       console.error("Error submitting form:", error);
-//     }
-//   };
-//   return (
-//     <Box sx={{ display: "flex" }}>
-//       <SideBar />
-//       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-//         <h1>Student Admission</h1>
-//         <div className="formBox">
-//           <form onSubmit={handleSubmit} className="stuAdmForm">
-//             <h3>Add Details</h3>
-//             <div className="flexDiv">
-//               <div className="inputFields">
-//                 <TextField
-//                   id="nameId"
-//                   name="fullname"
-//                   value={formData.fullname}
-//                   onChange={handleChange}
-//                   label="Enter full name"
-//                   type="text"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//               <div className="inputFields">
-//                 <TextField
-//                   id="emailId"
-//                   type="email"
-//                   name="email"
-//                   value={formData.email}
-//                   onChange={handleChange}
-//                   label="Enter Email Address"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//               <div className="inputFields">
-//                 <TextField
-//                   id="mobileId"
-//                   type="number"
-//                   name="mobile"
-//                   value={formData.mobile}
-//                   onChange={handleChange}
-//                   label="Enter Mobile Number"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                     height: "100%",
-//                   }}
-//                 />
-//               </div>
-//             </div>
-//             <div className="radioField">
-//               <Form.Select
-//                 name="gender"
-//                 value={formData.gender}
-//                 onChange={handleChange}
-//                 style={{
-//                   background: "white",
-//                   height: "3rem",
-//                   borderRadius: "8px",
-//                   width: "100%",
-//                 }}
-//               >
-//                 <option>Select Gender</option>
-//                 <option value="Male">Male</option>
-//                 <option value="Female">Female</option>
-//               </Form.Select>
-//             </div>
-//             <div className="flexDiv">
-//               <div className="inputFields">
-//                 <TextField
-//                   name="parentname"
-//                   value={formData.parentname}
-//                   onChange={handleChange}
-//                   label="Enter Parents Name"
-//                   type="text"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//               <div className="inputFields">
-//                 <TextField
-//                   name="parentoccupation"
-//                   value={formData.parentoccupation}
-//                   onChange={handleChange}
-//                   label="Enter Parents Occupation"
-//                   type="text"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//             </div>
-//             <div className="flexDiv">
-//               <div className="inputFields">
-//                 <TextField
-//                   type="number"
-//                   name="adharcard"
-//                   value={formData.adharcard}
-//                   onChange={handleChange}
-//                   label="Enter Aadhar number"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//               <div className="inputFields">
-//                 <TextField
-//                   type="text"
-//                   name="parentphone"
-//                   value={formData.parentphone}
-//                   onChange={handleChange}
-//                   label="Enter Parents Mobile"
-//                   style={{
-//                     background: "white",
-//                     borderRadius: "8px",
-//                     width: "100%",
-//                   }}
-//                 />
-//               </div>
-//             </div>
-//             <div className="dobDiv">
-//               <h6
-//                 style={{
-//                   margin: "0.5rem",
-//                 }}
-//               >
-//                 Date of Birth
-//               </h6>
-//               <Form.Control
-//                 type="date"
-//                 name="dob"
-//                 value={formData.dob}
-//                 onChange={handleChange}
-//                 style={{
-//                   height: "3rem",
-//                   background: "white",
-//                   borderRadius: "8px",
-//                   width: "60%",
-//                   margin: "0.5rem",
-//                 }}
-//               />
-//             </div>
-//             <hr />
-//             <h3>Address & Education</h3>
-//             <div className="inputFields">
-//               <TextField
-//                 type="text"
-//                 name="address"
-//                 value={formData.address}
-//                 onChange={handleChange}
-//                 label="Enter your address"
-//                 style={{
-//                   background: "white",
-//                   borderRadius: "8px",
-//                   width: "80%",
-//                 }}
-//               />
-//             </div>
-//             <div className="inputFields">
-//               <TextField
-//                 type="text"
-//                 name="education.edu"
-//                 value={formData.education.edu}
-//                 onChange={handleChange}
-//                 label="Enter your educational details"
-//                 style={{
-//                   background: "white",
-//                   borderRadius: "8px",
-//                   width: "80%",
-//                 }}
-//               />
-//             </div>
-//             <div className="inputFields">
-//               <TextField
-//                 type="text"
-//                 name="education.year"
-//                 value={formData.education.year}
-//                 onChange={handleChange}
-//                 label="Enter education year"
-//                 style={{
-//                   background: "white",
-//                   borderRadius: "8px",
-//                   width: "80%",
-//                 }}
-//               />
-//             </div>
-
-//             <hr />
-//             <h3>Course Details</h3>
-//             <div className="radioField">
-//               <Form.Select
-//                 name="courseInterested"
-//                 value={courseSelected}
-//                 onChange={handleChange}
-//                 style={{
-//                   background: "white",
-//                   height: "3.3rem",
-//                   borderRadius: "8px",
-//                   width: "60%",
-//                   margin: "0.3rem",
-//                 }}
-//               >
-//                 <option>Select Course Interested</option>
-//                 {courseOptions.map((course, index) => (
-//                   <option key={index} value={course}>
-//                     {course}
-//                   </option>
-//                 ))}
-//               </Form.Select>
-//             </div>
-
-//             <div className="btnBox">
-//               <Button id="stuSubBtn" type="submit" variant="success">
-//                 ADD COURSE
-//               </Button>
-//             </div>
-//           </form>
-//         </div>
-//       </Box>
-//     </Box>
-//   );
-// }
-
 import React, { useEffect, useState } from "react";
 import SideBar from "../Component/SideBar";
 import Box from "@mui/material/Box";
 import { useLocation, useNavigate } from "react-router-dom";
-import Form from "react-bootstrap/Form";
+
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
 
 export default function StudentAdmission() {
   const { pathname } = useLocation();
@@ -583,12 +190,13 @@ export default function StudentAdmission() {
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
         <h1>Student Admission</h1>
         <div className="formBox">
-          <form onSubmit={handleSubmit} className="stuAdmForm">
-            <h3>Add Details</h3>
+          <form onSubmit={handleSubmit} className="">
             {/* Branch Details */}
-            <div className="flexDiv">
-              <div className="inputFields">
+            <div className="formDetailbox">
+              <h3>Add Details</h3>
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="branchName"
                   name="branch.branchName"
                   value={formData.branch.branchName}
@@ -597,9 +205,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="registrationNumber"
                   name="branch.registerationNumber"
                   value={formData.branch.registerationNumber}
@@ -608,13 +216,13 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="radioField">
-                <Form.Select
+
+                <NativeSelect
                   name="courseInterested"
                   value={formData.branch.course}
                   onChange={handleCourseChange}
                   fullWidth
+                  style={{ width: "100%", margin: "0.5rem" }}
                 >
                   <option>Select Course Interested</option>
                   {courseOptions.map((course, index) => (
@@ -622,15 +230,29 @@ export default function StudentAdmission() {
                       {course}
                     </option>
                   ))}
-                </Form.Select>
+                </NativeSelect>
+                {/* <Form.Select
+                name="courseInterested"
+                value={formData.branch.course}
+                onChange={handleCourseChange}
+                fullWidth
+              >
+                <option>Select Course Interested</option>
+                {courseOptions.map((course, index) => (
+                  <option key={index} value={course}>
+                    {course}
+                  </option>
+                ))}
+              </Form.Select> */}
               </div>
             </div>
 
             {/* Personal Information */}
-            <h3>Personal Information</h3>
-            <div className="flexDiv">
-              <div className="inputFields">
+            <div className="formDetailbox">
+              <h3>Personal Information</h3>
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="firstName"
                   name="personalInfo.firstName"
                   value={formData.personalInfo.firstName}
@@ -639,9 +261,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="middleName"
                   name="personalInfo.middleName"
                   value={formData.personalInfo.middleName}
@@ -650,9 +272,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="personalInfo.lastName"
                   value={formData.personalInfo.lastName}
@@ -662,8 +284,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="gender"
                   name="personalInfo.gender"
                   value={formData.personalInfo.gender}
@@ -672,9 +295,8 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="dob"
                   name="personalInfo.dob"
                   value={formData.personalInfo.dob}
@@ -683,9 +305,8 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="category"
                   name="personalInfo.category"
                   value={formData.personalInfo.category}
@@ -695,8 +316,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="phone"
                   name="personalInfo.phone"
                   value={formData.personalInfo.phone}
@@ -705,9 +327,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="email"
                   name="personalInfo.email"
                   value={formData.personalInfo.email}
@@ -716,9 +338,8 @@ export default function StudentAdmission() {
                   type="email"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="asharcard"
                   name="personalInfo.adharcard"
                   value={formData.personalInfo.adharcard}
@@ -728,8 +349,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem", width: "32%" }}
                   id="pan"
                   name="personalInfo.pan"
                   value={formData.personalInfo.pan}
@@ -738,14 +360,17 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
+
+                {/* Add other personal information fields similarly */}
               </div>
-              {/* Add other personal information fields similarly */}
             </div>
             {/* Parent Information */}
-            <h3>Parent Information</h3>
-            <div className="flexDiv">
-              <div className="inputFields">
+            <div className="formDetailbox">
+              <h3>Parent Information</h3>
+
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="relation"
                   name="parent.relation"
                   value={formData.parent.relation}
@@ -754,9 +379,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="firstName"
                   name="parent.firstName"
                   value={formData.parent.firstName}
@@ -765,9 +390,8 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="parent.lastName"
                   value={formData.parent.lastName}
@@ -777,8 +401,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="email"
                   name="parent.email"
                   value={formData.parent.email}
@@ -787,9 +412,8 @@ export default function StudentAdmission() {
                   type="email"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="parent.phone"
                   value={formData.parent.phone}
@@ -798,9 +422,8 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{ margin: "0.5rem" }}
                   id="occupation"
                   name="parent.occupation"
                   value={formData.parent.occupation}
@@ -810,8 +433,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{ margin: "0.5rem", width: "32%" }}
                   id="address"
                   name="parent.address"
                   value={formData.parent.address}
@@ -821,14 +445,13 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-
-              {/* Add other parent information fields similarly */}
             </div>
             {/* Education Details */}
-            <h3>Education Details </h3>
-            <div className="flexDiv">
-              <div className="inputFields">
+            <div className="formDetailbox">
+              <h3>Education Details </h3>
+              <div className="flexDiv">
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="sscDegree"
                   name="education.ssc.degree"
                   value={formData.education.ssc.degree}
@@ -837,9 +460,8 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="sscPercentage"
                   name="education.ssc.percentage"
                   value={formData.education.ssc.percentage}
@@ -848,9 +470,9 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="sscYearOfPass"
                   name="education.ssc.yearOfPass"
                   value={formData.education.ssc.yearOfPass}
@@ -859,9 +481,8 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="sscUniversity"
                   name="education.ssc.university"
                   value={formData.education.ssc.university}
@@ -871,9 +492,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="hscDegree"
                   name="education.hsc.degree"
                   value={formData.education.hsc.degree}
@@ -882,9 +503,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                style={{margin:"0.5rem"}}
                   id="hscPercentage"
                   name="education.hsc.percentage"
                   value={formData.education.hsc.percentage}
@@ -893,9 +514,8 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="hscYearOfPass"
                   name="education.hsc.yearOfPass"
                   value={formData.education.hsc.yearOfPass}
@@ -904,9 +524,9 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="hscUniversity"
                   name="education.hsc.university"
                   value={formData.education.hsc.university}
@@ -917,8 +537,9 @@ export default function StudentAdmission() {
                 />
               </div>
 
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="graduationDegree"
                   name="education.graduation.degree"
                   value={formData.education.graduation.degree}
@@ -927,9 +548,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="graduationPercentage"
                   name="education.graduation.percentage"
                   value={formData.education.graduation.percentage}
@@ -938,9 +559,9 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="graduationYearOfPass"
                   name="education.graduation.yearOfPass"
                   value={formData.education.graduation.yearOfPass}
@@ -949,9 +570,9 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="graduationSubject"
                   name="education.graduation.subject"
                   value={formData.education.graduation.subject}
@@ -961,8 +582,9 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+              <div className="flexDiv">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="graduationUniversity"
                   name="education.graduation.university"
                   value={formData.education.graduation.university}
@@ -971,10 +593,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
 
-              <div className="inputFields">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="postGraduationDegree"
                   name="education.postGraduation.degree"
                   value={formData.education.postGraduation.degree}
@@ -983,9 +604,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="postGraduationPercentage"
                   name="education.postGraduation.percentage"
                   value={formData.education.postGraduation.percentage}
@@ -994,9 +615,8 @@ export default function StudentAdmission() {
                   type="Number"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="postGraduationYearOfPass"
                   name="education.postGraduation.yearOfPass"
                   value={formData.education.postGraduation.yearOfPass}
@@ -1006,8 +626,10 @@ export default function StudentAdmission() {
                   fullWidth
                 />
               </div>
-              <div className="inputFields">
+
+              <div className="flexDiv">
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="postGraduationSubject"
                   name="education.postGraduation.subject"
                   value={formData.education.postGraduation.subject}
@@ -1016,9 +638,9 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
-              </div>
-              <div className="inputFields">
+
                 <TextField
+                  style={{margin:"0.5rem"}}
                   id="postGraduationUniversity"
                   name="education.postGraduation.university"
                   value={formData.education.postGraduation.university}
@@ -1027,38 +649,31 @@ export default function StudentAdmission() {
                   type="text"
                   fullWidth
                 />
+
+                <TextField
+                  style={{margin:"0.5rem"}}
+                  id="otherQualification"
+                  name="education.otherQualification"
+                  value={formData.education.otherQualification}
+                  onChange={handleChange}
+                  label="Other Qualification"
+                  type="text"
+                  fullWidth
+                />
+
+                <TextField
+                  style={{margin:"0.5rem"}}
+                  id="hobbies"
+                  name="education.hobbies"
+                  value={formData.education.hobbies}
+                  onChange={handleChange}
+                  label="Hobbies"
+                  type="text"
+                  fullWidth
+                />
               </div>
-
-              {/* Add other education details fields similarly */}
-            </div>
-            {/* Other Details */}
-            <div className="inputFields">
-              <TextField
-                id="otherQualification"
-                name="education.otherQualification"
-                value={formData.education.otherQualification}
-                onChange={handleChange}
-                label="Other Qualification"
-                type="text"
-                fullWidth
-              />
             </div>
 
-            <div className="inputFields">
-              <TextField
-                id="hobbies"
-                name="education.hobbies"
-                value={formData.education.hobbies}
-                onChange={handleChange}
-                label="Hobbies"
-                type="text"
-                fullWidth
-              />
-            </div>
-            <hr />
-            {/* Course Details */}
-
-            {/* Submission Button */}
             <div className="btnBox">
               <Button id="stuSubBtn" type="submit" variant="success">
                 ADD COURSE
