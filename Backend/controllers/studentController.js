@@ -34,9 +34,7 @@ exports.createStudent = async (req, res) => {
 exports.getStudentById = async (req, res) => {
   try {
     console.log(req.params);
-    const student = await Student.findById(req.params.studentId).populate(
-      "applicationId batch"
-    );
+    const student = await Student.findById(req.params.studentId);
     if (!student) {
       return res.status(404).json({ message: "Student not found" });
     }
@@ -55,7 +53,7 @@ exports.updateStudent = async (req, res) => {
     console.log(updateFields);
     const student = await Student.findByIdAndUpdate(studentId, updateFields, {
       new: true,
-    }).populate("applicationId batch");
+    });
 
     if (!student) {
       return res.status(404).json({ message: "Student not found" });

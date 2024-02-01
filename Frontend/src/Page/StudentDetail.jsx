@@ -32,7 +32,7 @@ export default function StudentDetail() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-avhw.onrender.com/api/v1/student/getallstudents"
+        "https://lms-backend-hl4h.onrender.com/api/v1/student/getallstudents"
       );
       const data = await response.data;
       setData(data);
@@ -89,6 +89,42 @@ export default function StudentDetail() {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
+              {/* {data */}
+              {/* .filter((item) => { */}
+              {/* return search.toLowerCase() === "" */}
+              {/* ? item */}
+              {/* : item.applicationId.personalInfo.firstName */}
+              {/* .toLowerCase() */}
+              {/* .includes(search); */}
+              {/* }) */}
+              {/* .map((item, index) => ( */}
+              {/* <tr key={index}> */}
+              {/* {item.applicationId.education &&
+                    Object.values(item.applicationId.education).map(
+                      (value, subIndex) => <td key={subIndex}>{value}</td>
+                    )} */}
+              {/* <td> */}
+              {/* {item.applicationId.personalInfo.firstName}{" "}
+                      {item.applicationId.personalInfo.middleName}{" "}
+                      {item.applicationId.personalInfo.lastName} */}
+              {/* </td> */}
+              {/* <td>{item.applicationId.personalInfo.email}</td> */}
+              {/* <td>{item.applicationId.parentphone}</td> */}
+              {/* <td>{item.applicationId.personalInfo.phone}</td> */}
+              {/* <td>{item.applicationId.branch.course}</td> */}
+
+              {/* <td>{item.batch.batchname}</td> */}
+              {/* <td> */}
+              {/* <Button */}
+              {/* onClick={() => handleViewButtonClick(item._id)} */}
+              {/* variant="success" */}
+              {/* > */}
+              {/* View */}
+              {/* </Button> */}
+              {/* </td> */}
+              {/* </tr> */}
+              {/* ))} */}
+
               {data
                 .filter((item) => {
                   return search.toLowerCase() === ""
@@ -99,20 +135,14 @@ export default function StudentDetail() {
                 })
                 .map((item, index) => (
                   <tr key={index}>
-                    {/* {item.applicationId.education &&
-                    Object.values(item.applicationId.education).map(
-                      (value, subIndex) => <td key={subIndex}>{value}</td>
-                    )} */}
                     <td>
                       {item.applicationId.personalInfo.firstName}{" "}
                       {item.applicationId.personalInfo.middleName}{" "}
                       {item.applicationId.personalInfo.lastName}
                     </td>
                     <td>{item.applicationId.personalInfo.email}</td>
-                    {/* <td>{item.applicationId.parentphone}</td> */}
-                    <td>{item.applicationId.personalInfo.phone}</td>
+                    <td>{item.applicationId.parent.phone}</td>
                     <td>{item.applicationId.branch.course}</td>
-
                     <td>{item.batch.batchname}</td>
                     <td>
                       <Button
