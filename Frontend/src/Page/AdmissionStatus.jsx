@@ -93,15 +93,14 @@ export default function AdmissionStatus() {
             <MDBTable className="admissionStatusTable">
               <MDBTableHead>
                 <tr>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email id</th>
 
-                  <th scope="col">Mobile</th>
+                  <th scope="col">Phone No</th>
 
                   <th scope="col">Course Name</th>
 
-                  <th scope="col">Parent phone</th>
-                  <th scope="col">Admit</th>
+                  <th scope="col">Status</th>
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
@@ -115,10 +114,6 @@ export default function AdmissionStatus() {
                   })
                   .map((item, index) => (
                     <tr key={index}>
-                      {/* {item.education &&
-                      Object.values(item.education).map((value, subIndex) => (
-                        <td key={subIndex}>{value}</td>
-                      ))} */}
                       <td>
                         {item.personalInfo.firstName}{" "}
                         {item.personalInfo.middleName}{" "}
@@ -132,7 +127,6 @@ export default function AdmissionStatus() {
 
                       <td>{item.branch.course}</td>
 
-                      <td>{item.parent.phone}</td>
                       <td>
                         <Button
                           variant="success"
@@ -147,7 +141,7 @@ export default function AdmissionStatus() {
                                 : "pointer",
                           }}
                         >
-                          {item.status === "Admitted" ? "Admitted" : "Admit"}
+                          {item.status === "Admitted" ? "COMPLETED" : "PENDING"}
                         </Button>
                       </td>
                     </tr>

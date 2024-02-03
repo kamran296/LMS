@@ -81,50 +81,14 @@ export default function StudentDetail() {
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 {/* <th scope="col">Parent Phone</th> */}
-                <th scope="col">Mobile</th>
+                <th scope="col">Phone No</th>
                 <th scope="col">Course Name</th>
 
                 <th scope="col">Batch</th>
-                <th scope="col">View</th>
+                {/* <th scope="col">View</th> */}
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {/* {data */}
-              {/* .filter((item) => { */}
-              {/* return search.toLowerCase() === "" */}
-              {/* ? item */}
-              {/* : item.applicationId.personalInfo.firstName */}
-              {/* .toLowerCase() */}
-              {/* .includes(search); */}
-              {/* }) */}
-              {/* .map((item, index) => ( */}
-              {/* <tr key={index}> */}
-              {/* {item.applicationId.education &&
-                    Object.values(item.applicationId.education).map(
-                      (value, subIndex) => <td key={subIndex}>{value}</td>
-                    )} */}
-              {/* <td> */}
-              {/* {item.applicationId.personalInfo.firstName}{" "}
-                      {item.applicationId.personalInfo.middleName}{" "}
-                      {item.applicationId.personalInfo.lastName} */}
-              {/* </td> */}
-              {/* <td>{item.applicationId.personalInfo.email}</td> */}
-              {/* <td>{item.applicationId.parentphone}</td> */}
-              {/* <td>{item.applicationId.personalInfo.phone}</td> */}
-              {/* <td>{item.applicationId.branch.course}</td> */}
-
-              {/* <td>{item.batch.batchname}</td> */}
-              {/* <td> */}
-              {/* <Button */}
-              {/* onClick={() => handleViewButtonClick(item._id)} */}
-              {/* variant="success" */}
-              {/* > */}
-              {/* View */}
-              {/* </Button> */}
-              {/* </td> */}
-              {/* </tr> */}
-              {/* ))} */}
-
               {data
                 .filter((item) => {
                   return search.toLowerCase() === ""
@@ -135,7 +99,7 @@ export default function StudentDetail() {
                 })
                 .map((item, index) => (
                   <tr key={index}>
-                    <td>
+                    <td style={{textDecoration:"underline", cursor:"pointer"}} onClick={() => handleViewButtonClick(item._id)}>
                       {item.applicationId.personalInfo.firstName}{" "}
                       {item.applicationId.personalInfo.middleName}{" "}
                       {item.applicationId.personalInfo.lastName}
@@ -144,14 +108,14 @@ export default function StudentDetail() {
                     <td>{item.applicationId.parent.phone}</td>
                     <td>{item.applicationId.branch.course}</td>
                     <td>{item.batch.batchname}</td>
-                    <td>
+                    {/* <td>
                       <Button
                         onClick={() => handleViewButtonClick(item._id)}
                         variant="success"
                       >
                         View
                       </Button>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
             </MDBTableBody>

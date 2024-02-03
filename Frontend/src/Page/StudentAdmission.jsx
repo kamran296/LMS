@@ -188,14 +188,15 @@ export default function StudentAdmission() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-        <h1>Student Admission</h1>
+        <h1>Admission Form</h1>
         <div className="formBox">
           <form onSubmit={handleSubmit} className="">
             {/* Branch Details */}
             <div className="formDetailbox">
-              <h3>Add Details</h3>
+              <h3>Addmission at Branch</h3>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="branchName"
                   name="branch.branchName"
@@ -207,6 +208,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="registrationNumber"
                   name="branch.registerationNumber"
@@ -218,6 +220,7 @@ export default function StudentAdmission() {
                 />
 
                 <NativeSelect
+                  size="small"
                   name="courseInterested"
                   value={formData.branch.course}
                   onChange={handleCourseChange}
@@ -231,19 +234,6 @@ export default function StudentAdmission() {
                     </option>
                   ))}
                 </NativeSelect>
-                {/* <Form.Select
-                name="courseInterested"
-                value={formData.branch.course}
-                onChange={handleCourseChange}
-                fullWidth
-              >
-                <option>Select Course Interested</option>
-                {courseOptions.map((course, index) => (
-                  <option key={index} value={course}>
-                    {course}
-                  </option>
-                ))}
-              </Form.Select> */}
               </div>
             </div>
 
@@ -252,6 +242,7 @@ export default function StudentAdmission() {
               <h3>Personal Information</h3>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="firstName"
                   name="personalInfo.firstName"
@@ -263,6 +254,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="middleName"
                   name="personalInfo.middleName"
@@ -274,6 +266,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="personalInfo.lastName"
@@ -286,6 +279,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="gender"
                   name="personalInfo.gender"
@@ -296,6 +290,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="dob"
                   name="personalInfo.dob"
@@ -306,6 +301,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="category"
                   name="personalInfo.category"
@@ -318,6 +314,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="phone"
                   name="personalInfo.phone"
@@ -329,6 +326,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="email"
                   name="personalInfo.email"
@@ -339,6 +337,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="asharcard"
                   name="personalInfo.adharcard"
@@ -351,6 +350,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem", width: "32%" }}
                   id="pan"
                   name="personalInfo.pan"
@@ -370,6 +370,7 @@ export default function StudentAdmission() {
 
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="relation"
                   name="parent.relation"
@@ -381,6 +382,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="firstName"
                   name="parent.firstName"
@@ -391,6 +393,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="parent.lastName"
@@ -403,6 +406,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="email"
                   name="parent.email"
@@ -413,6 +417,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="lastName"
                   name="parent.phone"
@@ -423,6 +428,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem" }}
                   id="occupation"
                   name="parent.occupation"
@@ -435,6 +441,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                  size="small"
                   style={{ margin: "0.5rem", width: "32%" }}
                   id="address"
                   name="parent.address"
@@ -451,6 +458,7 @@ export default function StudentAdmission() {
               <h3>Education Details </h3>
               <div className="flexDiv">
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="sscDegree"
                   name="education.ssc.degree"
@@ -461,6 +469,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="sscPercentage"
                   name="education.ssc.percentage"
@@ -472,6 +481,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="sscYearOfPass"
                   name="education.ssc.yearOfPass"
@@ -482,6 +492,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="sscUniversity"
                   name="education.ssc.university"
@@ -494,6 +505,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="hscDegree"
                   name="education.hsc.degree"
@@ -505,6 +517,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="hscPercentage"
                   name="education.hsc.percentage"
@@ -515,6 +528,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="hscYearOfPass"
                   name="education.hsc.yearOfPass"
@@ -526,6 +540,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="hscUniversity"
                   name="education.hsc.university"
@@ -539,6 +554,7 @@ export default function StudentAdmission() {
 
               <div className="flexDiv">
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="graduationDegree"
                   name="education.graduation.degree"
@@ -550,6 +566,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="graduationPercentage"
                   name="education.graduation.percentage"
@@ -561,6 +578,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="graduationYearOfPass"
                   name="education.graduation.yearOfPass"
@@ -572,6 +590,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="graduationSubject"
                   name="education.graduation.subject"
@@ -584,6 +603,7 @@ export default function StudentAdmission() {
               </div>
               <div className="flexDiv">
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="graduationUniversity"
                   name="education.graduation.university"
@@ -595,6 +615,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="postGraduationDegree"
                   name="education.postGraduation.degree"
@@ -606,6 +627,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="postGraduationPercentage"
                   name="education.postGraduation.percentage"
@@ -616,6 +638,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="postGraduationYearOfPass"
                   name="education.postGraduation.yearOfPass"
@@ -629,6 +652,7 @@ export default function StudentAdmission() {
 
               <div className="flexDiv">
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="postGraduationSubject"
                   name="education.postGraduation.subject"
@@ -640,6 +664,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="postGraduationUniversity"
                   name="education.postGraduation.university"
@@ -651,6 +676,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="otherQualification"
                   name="education.otherQualification"
@@ -662,6 +688,7 @@ export default function StudentAdmission() {
                 />
 
                 <TextField
+                size="small"
                   style={{ margin: "0.5rem" }}
                   id="hobbies"
                   name="education.hobbies"
@@ -676,7 +703,7 @@ export default function StudentAdmission() {
 
             <div className="btnBox">
               <Button id="stuSubBtn" type="submit" variant="success">
-                ADD COURSE
+                ADD STUDENT
               </Button>
             </div>
           </form>
