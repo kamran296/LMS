@@ -93,6 +93,7 @@ export default function AdmissionStatus() {
             <MDBTable className="admissionStatusTable">
               <MDBTableHead>
                 <tr>
+                  <th>Sr No</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email id</th>
 
@@ -114,6 +115,8 @@ export default function AdmissionStatus() {
                   })
                   .map((item, index) => (
                     <tr key={index}>
+                      <td>{index + 1}</td>
+
                       <td>
                         {item.personalInfo.firstName}{" "}
                         {item.personalInfo.middleName}{" "}
@@ -134,7 +137,9 @@ export default function AdmissionStatus() {
                           disabled={item.status === "Admitted"}
                           style={{
                             backgroundColor:
-                              item.status === "Admitted" ? "green" : "red",
+                              item.status === "Admitted"
+                                ? "#ff6636"
+                                : "#1F263E",
                             cursor:
                               item.status === "Admitted"
                                 ? "not-allowed"

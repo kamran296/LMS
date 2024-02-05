@@ -81,21 +81,19 @@ export default function BatchList() {
         <MDBTable className="batchTable">
           <MDBTableHead>
             <tr>
+              <th>Sr No.</th>
               <th scope="col">Batch Name</th>
               <th scope="col">Course Name</th>
-              <th scope="col">Assigned Teacher</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Teacher</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
             {batchesData.map((item, index) => (
               <tr key={index}>
+                <td>{index + 1}</td>
                 <td>{item.batchname}</td>
                 <td>{item.course && item.course.coursename}</td>
                 <td>{item.teacher && item.teacher.name}</td>
-                <td>
-                  <Button variant="success">Edit</Button>
-                </td>
               </tr>
             ))}
           </MDBTableBody>

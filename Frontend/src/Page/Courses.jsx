@@ -81,6 +81,7 @@ export default function Courses() {
         <MDBTable className="courseTable">
           <MDBTableHead>
             <tr>
+              <th>Sr No.</th>
               <th scope="col">Course Name</th>
               <th scope="col">Description</th>
               <th scope="col">Duration</th>
@@ -88,8 +89,9 @@ export default function Courses() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {courseData.map((course) => (
+            {courseData.map((course, index) => (
               <tr key={course._id}>
+                <td>{index + 1}</td>
                 <td>{course.coursename}</td>
                 <td>{course.desc}</td>
                 <td>{course.duration}</td>

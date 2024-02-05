@@ -72,12 +72,7 @@ export default function StudentDetail() {
           <MDBTable className="studentDetailTable">
             <MDBTableHead>
               <tr>
-                {/* {data.length > 0 &&
-                  Object.keys(data[0].applicationId.education).map((key) => (
-                    <th key={key} scope="col">
-                      Education {key}
-                    </th>
-                  ))} */}
+                <th>Sr No</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 {/* <th scope="col">Parent Phone</th> */}
@@ -99,7 +94,11 @@ export default function StudentDetail() {
                 })
                 .map((item, index) => (
                   <tr key={index}>
-                    <td style={{textDecoration:"underline", cursor:"pointer"}} onClick={() => handleViewButtonClick(item._id)}>
+                    <td>{index + 1}</td>
+                    <td
+                      style={{ textDecoration: "underline", cursor: "pointer" }}
+                      onClick={() => handleViewButtonClick(item._id)}
+                    >
                       {item.applicationId.personalInfo.firstName}{" "}
                       {item.applicationId.personalInfo.middleName}{" "}
                       {item.applicationId.personalInfo.lastName}
