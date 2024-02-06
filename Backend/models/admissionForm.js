@@ -31,7 +31,7 @@ const PersonalSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: true,
-    enum: ["Male", "Female", "Other", "male", "female", "other"],
+    enum: ["Male", "Female", "Other"],
   },
   dob: {
     type: Date,
@@ -39,7 +39,7 @@ const PersonalSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["SC", "ST", "OBC", "OPEN", "sc", "st", "obc", "open"],
+    enum: ["SC", "ST", "OBC", "OPEN"],
     required: true,
   },
   phone: {
@@ -67,7 +67,7 @@ const PersonalSchema = new mongoose.Schema({
 const ParentSchema = new mongoose.Schema({
   relation: {
     type: String,
-    enum: ["Mother", "Father"],
+    enum: ["Mother", "Father", "Other"],
     required: true,
   },
   firstName: {

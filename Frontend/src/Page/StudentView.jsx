@@ -22,6 +22,7 @@ import Button from "react-bootstrap/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import MuiButton from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import { NativeSelect } from "@mui/material";
 import "./mainPage.css";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -347,6 +348,16 @@ const StudentView = () => {
                           style={{ margin: "0.5rem" }}
                           size="small"
                           id="outlined-read-only-input"
+                          label="Amount"
+                          defaultValue={fee.paidamount}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
                           label="Date"
                           defaultValue={new Date(fee.date).toLocaleDateString()}
                           InputProps={{
@@ -430,6 +441,22 @@ const StudentView = () => {
                         />
                       </div>
                       <div>
+                        <NativeSelect
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          label="Status"
+                          type="text"
+                          className="status"
+                          value={formData.status}
+                          onChange={(e) =>
+                            setFormData({ ...formData, status: e.target.value })
+                          }
+                        >
+                          <option>Select Status</option>
+                          <option>Paid</option>
+                          <option>Partial</option>
+                          <option>Unpaid</option>
+                        </NativeSelect>
                         <TextField
                           style={{ margin: "0.5rem" }}
                           size="small"

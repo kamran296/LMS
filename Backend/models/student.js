@@ -1,47 +1,3 @@
-// const mongoose = require("mongoose");
-// const Admission = require("./admissionForm");
-// const studentSchema = new mongoose.Schema({
-//   applicationId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "Admission",
-//     required: true,
-//   },
-//   batch: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     required: true,
-//   },
-//   roll_no: {
-//     type: Number,
-//     require: true,
-//   },
-//   fees: {
-//     amount: {
-//       type: Number,
-//       required: true,
-//     },
-//     paidamount: {
-//       type: Number,
-//       required: true,
-//     },
-
-//     date: {
-//       type: Date,
-
-//     },
-
-//     status: {
-//       type: String,
-//       required: true,
-//       enum: ["Paid", "Partial", "unpaid"],
-//     },
-//     receiptImage: {
-//       type: String, // You can also use Buffer type if you want to store the image as binary data
-//     },
-//   },
-// });
-
-// module.exports = mongoose.model("Student", studentSchema);
-
 const mongoose = require("mongoose");
 const Admission = require("./admissionForm");
 
@@ -61,7 +17,7 @@ const feeSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["Paid", "Partial", "unpaid"],
+    enum: ["Paid", "Partial", "Unpaid"],
   },
   image: {
     type: String,

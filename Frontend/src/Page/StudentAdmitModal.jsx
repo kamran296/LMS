@@ -255,8 +255,7 @@ const StudentAdmitModal = ({
                   value={fee.date}
                   onChange={(e) => handleInputChange(e, index)}
                 />
-
-                <TextField
+                <NativeSelect
                   style={{ margin: "0.5rem", width: "45%" }}
                   id="outlined-basic"
                   variant="outlined"
@@ -266,7 +265,13 @@ const StudentAdmitModal = ({
                   label="Status"
                   value={fee.status}
                   onChange={(e) => handleInputChange(e, index)}
-                />
+                >
+                  {" "}
+                  <option>Select Status</option>
+                  <option>Paid</option>
+                  <option>Partial</option>
+                  <option>Unpaid</option>
+                </NativeSelect>
 
                 <Button
                   style={{ margin: "0.5rem", width: "45%" }}
