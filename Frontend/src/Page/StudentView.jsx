@@ -19,7 +19,21 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "react-bootstrap/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import MuiButton from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 import "./mainPage.css";
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 const StudentView = () => {
   const { pathname } = useLocation();
 
@@ -164,13 +178,13 @@ const StudentView = () => {
               </MDBTabsLink>
             </MDBTabsItem>
             <MDBTabsItem>
-              <MDBTabsLink
+              {/* <MDBTabsLink
                 id="tabId2"
                 onClick={() => handleBasicClick("tab2")}
                 active={basicActive === "tab2"}
               >
                 Update Fees
-              </MDBTabsLink>
+              </MDBTabsLink> */}
             </MDBTabsItem>
           </MDBTabs>
 
@@ -373,11 +387,94 @@ const StudentView = () => {
                         </div>
                       </div>
                     ))}
+                    <h3>Update Fees Details</h3>
+                    <form onSubmit={handleSubmit}>
+                      <div>
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Amount"
+                          type="number"
+                          className="amount"
+                          value={formData.amount}
+                          onChange={(e) =>
+                            setFormData({ ...formData, amount: e.target.value })
+                          }
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          label="Paid Amount"
+                          type="number"
+                          className="paidamount"
+                          value={formData.paidamount}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              paidamount: e.target.value,
+                            })
+                          }
+                        />
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          id="outlined-read-only-input"
+                          type="date"
+                          className="date"
+                          value={formData.date}
+                          onChange={(e) =>
+                            setFormData({ ...formData, date: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <TextField
+                          style={{ margin: "0.5rem" }}
+                          size="small"
+                          label="Status"
+                          type="text"
+                          className="status"
+                          value={formData.status}
+                          onChange={(e) =>
+                            setFormData({ ...formData, status: e.target.value })
+                          }
+                        />
+                        <MuiButton
+                          style={{
+                            margin: "0.5rem",
+                            backgroundColor: "#ff6636",
+                          }}
+                          component="label"
+                          variant="contained"
+                          className="image"
+                          name="image"
+                          onChange={handleFileUpload}
+                          startIcon={<CloudUploadIcon />}
+                        >
+                          Upload file
+                          <VisuallyHiddenInput type="file" />
+                        </MuiButton>
+                      </div>
+                      <div>
+                        <MuiButton
+                          style={{
+                            margin: "0.5rem",
+                            backgroundColor: "#ff6636",
+                          }}
+                          variant="contained"
+                          type="submit"
+                        >
+                          Submit
+                        </MuiButton>
+                      </div>
+                    </form>
                   </div>
                 )}
               </MDBContainer>
             </MDBTabsPane>
-            <MDBTabsPane open={basicActive === "tab2"}>
+            {/* <MDBTabsPane open={basicActive === "tab2"}>
               <MDBContainer>
                 <form onSubmit={handleSubmit}>
                   <label htmlFor="amount">Amount</label>
@@ -431,7 +528,7 @@ const StudentView = () => {
                   <button type="submit">Submit</button>
                 </form>
               </MDBContainer>
-            </MDBTabsPane>
+            </MDBTabsPane> */}
           </MDBTabsContent>
         </div>
       </Box>
