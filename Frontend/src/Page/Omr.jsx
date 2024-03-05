@@ -5,8 +5,8 @@ import SideBar from "../Component/SideBar";
 import Button from "react-bootstrap/Button";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
-import NativeSelect from "@mui/material/NativeSelect";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Typography } from "@mui/material";
+
 const Omr = () => {
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [csvData, setCsvData] = useState("");
@@ -54,6 +54,7 @@ const Omr = () => {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+        <Typography variant="h3">OMR Evaluation</Typography>
         <form onSubmit={handleSubmit}>
           <input type="file" multiple onChange={handleFileChange} />
           <button type="submit">Upload Files</button>

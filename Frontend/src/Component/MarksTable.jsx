@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { TextField } from "@mui/material";
+// import { TextField } from "@mui/material";
+import {
+  Typography,
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+
 function MarksTable({ csvData }) {
   const [data, setData] = useState([]);
   console.log(data);
@@ -41,17 +53,18 @@ function MarksTable({ csvData }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/student/addmarks",
+        "https://lms-backend-avhw.onrender.com/api/v1/student/addmarks",
         formData
       );
       console.log(response.json);
+      alert("Marks Added Successfully!!");
     } catch (error) {}
   };
 
   return (
     <div>
       <h2>Marks Table</h2>
-      <table border="1">
+      {/* <table border="1">
         <thead>
           <tr>
             <th>Roll Number</th>
@@ -66,7 +79,25 @@ function MarksTable({ csvData }) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Roll Number</TableCell>
+              <TableCell>Score</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell>{row['"Roll_No"']}</TableCell>
+                <TableCell>{row['"score"']}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <form action="">
         <TextField
           size="small"
