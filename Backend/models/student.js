@@ -25,6 +25,17 @@ const feeSchema = new mongoose.Schema({
   },
 });
 
+const markSchema = new mongoose.Schema({
+  testName: {
+    type: String,
+    required: true,
+  },
+  marks: {
+    type: String,
+    required: true,
+  },
+});
+
 const studentSchema = new mongoose.Schema({
   applicationId: {
     // type: mongoose.Schema.Types.ObjectId,
@@ -35,14 +46,15 @@ const studentSchema = new mongoose.Schema({
   batch: {
     // type: mongoose.Schema.Types.ObjectId,
     type: Object,
+    // ref: "Batch",
     required: true,
   },
   roll_no: {
-    type: Number,
-    require: true,
-    unique: true,
+    type: String,
+    required: true,
   },
   fees: [feeSchema],
+  marks: [markSchema],
 });
 
 module.exports = mongoose.model("Student", studentSchema);

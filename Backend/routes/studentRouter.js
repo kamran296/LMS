@@ -7,5 +7,6 @@ router.route("/:studentid").put(studenController.updateStudent);
 router.route(":/studentId").delete(studenController.deleteStudent);
 router.route("/view/:studentId").get(studenController.getStudentById);
 router.route("/addfees/:studentId").post(studenController.Addfees);
+router.route("/addmarks").post(studenController.addMarks);
 
 module.exports = router;

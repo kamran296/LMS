@@ -149,6 +149,23 @@ const StudentAdmitModal = ({
       setFormData({ ...formData, [name]: value });
     }
   };
+  // // Function to handle input changes
+  // const handleInputChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   if (name.includes("fees")) {
+  //     // Handle changes for fee details
+  //     const updatedFees = [...formData.fees];
+  //     const [feeName, feeIndex, subField] = name.split(".");
+  //     updatedFees[feeIndex][subField] = value;
+  //     setFormData({ ...formData, fees: updatedFees });
+  //   } else if (name === "roll_no") {
+  //     // Ensure roll_no is treated as a string
+  //     setFormData({ ...formData, [name]: String(value) });
+  //   } else {
+  //     // Handle changes for main form fields
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
   const [batch, setBatch] = useState("");
   const handleBatchChange = (e) => {
     const selectedBatchId = e.target.value;
@@ -165,6 +182,7 @@ const StudentAdmitModal = ({
 
       const response = await axios.post(
         "https://lms-backend-avhw.onrender.com/api/v1/student/create-student",
+        // "http://localhost:8000/api/v1/student/create-student",
         formData
       );
       const status = "Admitted";
@@ -212,7 +230,7 @@ const StudentAdmitModal = ({
               id="outlined-basic"
               variant="outlined"
               size="small"
-              type="number"
+              type="text"
               name="roll_no"
               label="Roll No"
               value={formData.roll_no}

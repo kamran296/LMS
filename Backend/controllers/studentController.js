@@ -113,3 +113,41 @@ exports.Addfees = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.addMarks = async (req, res) => {
+  const marksData = req.body;
+  console.log(marksData);
+  try {
+    // Extract the test name from marksData
+    const { testName, ...marks } = marksData;
+
+    // Iterate through the marks data
+    for (const roll_no in marks) {
+      if (marks.hasOwnProperty(roll_no)) {
+        // Remove the double quotes from the roll number
+        const cleanRollNo = roll_no.replace(/"/g, "");
+
+        const mark = marks[roll_no]; // Get the mark for the current roll number
+
+        // Find the student by roll number
+        const student = await Student.findOne({ roll_no: cleanRollNo });
+
+        if (!student) {
+          console.log(`Student with roll number ${cleanRollNo} not found`);
+          continue; // Continue with the next iteration
+        }
+
+        // Add marks to the student
+        student.marks.push({ testName, marks: mark });
+
+        // Save the updated student document
+        await student.save();
+      }
+    }
+
+    return res.status(200).json({ message: "Marks added successfully" });
+  } catch (error) {
+    console.error("Error adding marks:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
