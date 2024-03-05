@@ -16,6 +16,7 @@ import {
 
 function MarksTable({ csvData }) {
   const [data, setData] = useState([]);
+
   console.log(data);
   // const [formData, setFormData] = useState({});
   useEffect(() => {
@@ -58,6 +59,7 @@ function MarksTable({ csvData }) {
       );
       console.log(response.json);
       alert("Marks Added Successfully!!");
+      window.location.reload();
     } catch (error) {}
   };
 

@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import axios from "axios";
+import "./mainPage.css";
 import MarksTable from "../Component/MarksTable";
 import SideBar from "../Component/SideBar";
 import Button from "react-bootstrap/Button";
 import Box from "@mui/material/Box";
-import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 const Omr = () => {
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [csvData, setCsvData] = useState("");
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const handleFileChange = (event) => {
+    alert("Files selected successfully");
     setSelectedFiles(event.target.files);
   };
 
@@ -22,6 +23,9 @@ const Omr = () => {
       alert("Please select files.");
       return;
     }
+
+    // Set loading to true to show loading indicator
+    setLoading(true);
 
     // Prepare form data
     const formData = new FormData();
@@ -47,22 +51,46 @@ const Omr = () => {
       }
     } catch (error) {
       console.error("Error uploading files:", error);
+    } finally {
+      // Set loading back to false after upload completes
+      setLoading(false);
     }
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <SideBar />
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-        <Typography variant="h3">OMR Evaluation</Typography>
-        <form onSubmit={handleSubmit}>
-          <input type="file" multiple onChange={handleFileChange} />
-          <button type="submit">Upload Files</button>
-        </form>
+    <>
+      <Box sx={{ display: "flex" }}>
+        <SideBar />
+        <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+          <Typography variant="h3">OMR Evaluation</Typography>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="fileInput" className="custom-file-input">
+              <span className="file-label">Choose a file</span>
+              <input
+                id="fileInput"
+                className="btnFileClass"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+            </label>
+            <br />
+            <Button
+              style={{
+                margin: "1rem",
+                backgroundColor: "rgb(239, 130, 28)",
+              }}
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Uploading..." : "Upload Files"}
+            </Button>
+          </form>
 
-        {csvData && <MarksTable csvData={csvData} />}
+          {csvData && <MarksTable csvData={csvData} />}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

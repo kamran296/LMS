@@ -13,17 +13,17 @@
   background-color: #fff1f1;
   border-radius: 12px;
 }
-.formDetailbox{
+.formDetailbox {
   margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem;
-   background-color: #fff1f1;
+  background-color: #fff1f1;
   border-radius: 12px;
 }
 .flexDiv {
- margin: 1rem;
+  margin: 1rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -52,8 +52,7 @@ th {
 #stuSubBtn,
 #BatchBtn,
 #addCourseBtn,
-#teacherSubBtn
-{
+#teacherSubBtn {
   background-color: #ff6636;
   margin: 1rem;
   width: 15rem;
@@ -66,36 +65,58 @@ th {
   justify-content: center;
   align-items: center;
 }
-.studentViewBox{
-   background-color: #fff1f1;
+.studentViewBox {
+  background-color: #fff1f1;
   margin: 6rem;
   width: 100%;
   border-radius: 10px;
   padding: 1rem;
 }
-.modalBox{
- margin: 4rem;
+.modalBox {
+  margin: 4rem;
 }
-.flexModal{
+.flexModal {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.headingFlex{
+.headingFlex {
   margin: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#tabId1, #tabId2{
+#tabId1,
+#tabId2 {
   background: none;
   color: black;
   font-weight: bold;
   font-size: 1rem;
   text-decoration: underline;
 }
-.flexViewBox{
+.flexViewBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+/* Hide the default file input styles */
+input[type="file"] {
+  display: none;
+}
+
+/* Style the custom file input container */
+.custom-file-input {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: rgb(239, 130, 28);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+/* Style the file input label text */
+.file-label {
+  font-size: 16px;
+  /* font-weight: bold; */
 }
