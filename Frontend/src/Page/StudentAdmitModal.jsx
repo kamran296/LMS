@@ -5,7 +5,7 @@ import "firebase/compat/storage";
 import Modal from "react-bootstrap/Modal";
 // import Button from "react-bootstrap/Button";
 import Button from "@mui/material/Button";
-
+import "./StudentModal.css";
 import NativeSelect from "@mui/material/NativeSelect";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import TextField from "@mui/material/TextField";
@@ -205,7 +205,17 @@ const StudentAdmitModal = ({
   };
 
   return (
-    <Modal show={show} onHide={handleClose} className="modalBox">
+    <Modal
+      show={show}
+      onHide={handleClose}
+      className="modalBox"
+      style={{
+        "max-height": "100vh" /* Adjust the maximum height as needed */,
+        "max-width": "100vw",
+        "overflow-y": "auto",
+        "overflow-x": "auto",
+      }}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Admit Student</Modal.Title>
       </Modal.Header>
@@ -237,9 +247,23 @@ const StudentAdmitModal = ({
               onChange={(e) => handleInputChange(e)}
             />
           </div>
-          <div className="flexModal">
+          <div
+            className="flexModal"
+            style={{
+              display: "flex",
+              "flex-wrap": "wrap",
+              "margin-bottom": "1rem",
+            }}
+          >
             {formData.fees.map((fee, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                style={{
+                  "max-height":
+                    "200vh" /* Adjust the maximum height as needed */,
+                  "overflow-y": "auto",
+                }}
+              >
                 {/* Add fields for fee details */}
                 <TextField
                   style={{ margin: "0.5rem", width: "45%" }}
