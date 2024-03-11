@@ -5,7 +5,7 @@ import "firebase/compat/storage";
 import Modal from "react-bootstrap/Modal";
 // import Button from "react-bootstrap/Button";
 import Button from "@mui/material/Button";
-import "./StudentModal.css";
+
 import NativeSelect from "@mui/material/NativeSelect";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import TextField from "@mui/material/TextField";
