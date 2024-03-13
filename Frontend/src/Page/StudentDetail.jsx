@@ -43,7 +43,7 @@ export default function StudentDetail() {
       const totalPages = Math.ceil(data.totalCount / 10);
 
       setTotalPages(totalPages);
-      console.log("Data represented successfully", data);
+      console.log("Data represented successfully", data.students);
     } catch (err) {
       console.log(err);
     }
