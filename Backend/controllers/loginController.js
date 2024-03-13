@@ -1,31 +1,45 @@
 const bcrypt = require("bcryptjs");
 const Admin = require("../models/Admin");
-const password = process.env.DEFAULT_PASSWORD;
-const username = process.env.DEFAULT_USERNAME;
+
 const jwt = require("jsonwebtoken");
 
 const hashed_password = async (pass) => {
-  const salt = await bcrypt.genSalt(10);
-  console.log("salt1", salt);
-  const password_hashed = await bcrypt.hash(password, salt);
-  return password_hashed;
-};
-module.exports.initializeAdmin = async () => {
   try {
-    const alreadyExits = await Admin.findOne({ username });
-    if (!alreadyExits) {
-      const hash_password = await hashed_password(password);
+    const salt = await bcrypt.genSalt(10);
+    console.log("Salt: ", salt);
+    const passwordHashed = await bcrypt.hash(pass, salt);
+    return passwordHashed;
+  } catch (error) {
+    console.error("Error hashing password:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+};
 
-      const newAdmin = new Admin({
-        username: username,
-        password: hash_password,
-      });
-      await newAdmin.save();
-      console.log("admin created successfully");
+module.exports.createAdmin = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const alreadyExists = await Admin.findOne({ username });
+
+    if (alreadyExists) {
+      return res.status(400).json({ message: "Admin already exists" });
     }
-  } catch (err) {
-    console.log("error in login ", err);
-    return "404";
+
+    const hashPassword = await hashed_password(password);
+
+    const newAdmin = new Admin({
+      username: username,
+      password: hashPassword,
+    });
+
+    await newAdmin.save();
+
+    console.log("Admin created successfully");
+
+    return res.status(200).json({ message: "Admin created successfully" });
+  } catch (error) {
+    console.error("Error in creating admin:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 

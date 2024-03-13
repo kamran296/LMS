@@ -3,7 +3,14 @@ const Batch = require("../models/batch");
 // Controller to get all batches
 exports.getAllBatches = async (req, res) => {
   try {
-    const batches = await Batch.find().populate("course");
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+    const batches = await Batch.find()
+      .skip(skip)
+      .limit(limit)
+      .populate("course")
+      .populate("teacher");
     res.json(batches);
   } catch (error) {
     res.status(500).json({ message: error.message });

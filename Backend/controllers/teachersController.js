@@ -3,7 +3,11 @@ const validator = require("validator");
 // Controller to get all teachers
 exports.getAllTeachers = async (req, res) => {
   try {
-    const teachers = await Teacher.find();
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const teachers = await Teacher.find().skip(skip).limit(limit);
     res.json(teachers);
   } catch (error) {
     res.status(500).json({ message: error.message });

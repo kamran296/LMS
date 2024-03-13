@@ -27,6 +27,7 @@ const StudentAdmitModal = ({
   handleClose,
   handleAdmit,
   applicationId,
+  amount,
 }) => {
   const [batches, setBatches] = useState([]);
   const [status, setStatus] = useState("Admit");
@@ -36,17 +37,18 @@ const StudentAdmitModal = ({
     batchOptions();
     const ApplicationData = async (req, res) => {
       try {
-        const response = await axios.get(
-          `https://lms-backend-avhw.onrender.com/api/v1/admissions/${applicationId}`
-        );
-        const data = await response.data;
+        // const response = await axios.get(
+        //   `https://lms-backend-avhw.onrender.com/api/v1/admissions/${applicationId}`
+        // );
+        // const data = await response.data;
         // setApplicationData(data);
         setFormData((prevFormData) => ({
           ...prevFormData,
-          applicationId: data,
+          // applicationId: data,
+          applicationId: applicationId,
         }));
-        console.log(data, 432);
-        return data;
+
+        // return data;
       } catch (err) {
         console.log(err);
       }
@@ -67,12 +69,12 @@ const StudentAdmitModal = ({
   };
 
   const [formData, setFormData] = useState({
-    applicationId: "",
+    applicationId: applicationId,
     batch: "",
-    roll_no: "",
+    // roll_no:""
     fees: [
       {
-        amount: "",
+        amount: amount,
         paidamount: "",
         date: "",
         status: "",
@@ -83,16 +85,16 @@ const StudentAdmitModal = ({
 
   // function for saving batch data in the student
   const BatchData = async (selectedBatchId) => {
-    const response = await axios.get(
-      `https://lms-backend-avhw.onrender.com/api/v1/batch/${selectedBatchId}`
-    );
-    const data = await response.data;
-    setBatchData(data);
+    // const response = await axios.get(
+    //   `https://lms-backend-avhw.onrender.com/api/v1/batch/${selectedBatchId}`
+    // );
+    // const data = await response.data;
+    setBatchData(selectedBatchId);
     // setFormData({ ...formData, batch: batchData });
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      batch: data, // Use the updated batchData from the state
+      batch: selectedBatchId, // Use the updated batchData from the state
     }));
   };
 
@@ -149,23 +151,6 @@ const StudentAdmitModal = ({
       setFormData({ ...formData, [name]: value });
     }
   };
-  // // Function to handle input changes
-  // const handleInputChange = (e, index) => {
-  //   const { name, value } = e.target;
-  //   if (name.includes("fees")) {
-  //     // Handle changes for fee details
-  //     const updatedFees = [...formData.fees];
-  //     const [feeName, feeIndex, subField] = name.split(".");
-  //     updatedFees[feeIndex][subField] = value;
-  //     setFormData({ ...formData, fees: updatedFees });
-  //   } else if (name === "roll_no") {
-  //     // Ensure roll_no is treated as a string
-  //     setFormData({ ...formData, [name]: String(value) });
-  //   } else {
-  //     // Handle changes for main form fields
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
   const [batch, setBatch] = useState("");
   const handleBatchChange = (e) => {
     const selectedBatchId = e.target.value;
@@ -235,7 +220,7 @@ const StudentAdmitModal = ({
                 </option>
               ))}
             </NativeSelect>
-            <TextField
+            {/* <TextField
               style={{ margin: "0.5rem", width: "50%" }}
               id="outlined-basic"
               variant="outlined"
@@ -245,7 +230,7 @@ const StudentAdmitModal = ({
               label="Roll No"
               value={formData.roll_no}
               onChange={(e) => handleInputChange(e)}
-            />
+            /> */}
           </div>
           <div
             className="flexModal"
@@ -273,7 +258,8 @@ const StudentAdmitModal = ({
                   type="text"
                   name={`fees.${index}.amount`}
                   label="Amount"
-                  value={fee.amount}
+                  // value={amount}
+                  value={fee.amount || amount}
                   onChange={(e) => handleInputChange(e, index)}
                 />
                 <TextField
@@ -281,10 +267,11 @@ const StudentAdmitModal = ({
                   id="outlined-basic"
                   variant="outlined"
                   size="small"
-                  type="text"
+                  type="Number"
                   name={`fees.${index}.paidamount`}
                   label="Paid Amount"
                   value={fee.paidamount}
+                  inputProps={{ min: 0, max: amount }}
                   onChange={(e) => handleInputChange(e, index)}
                 />
                 <TextField
@@ -322,7 +309,7 @@ const StudentAdmitModal = ({
                   size="small"
                   startIcon={<CloudUploadIcon />}
                 >
-                  Upload file
+                  Upload fee reciept
                   <VisuallyHiddenInput
                     type="file"
                     name={`fees.${index}.image`}

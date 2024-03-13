@@ -95,7 +95,13 @@ export default function StudentAdmission() {
 
         if (response.status === 200) {
           const data = await response.json();
-          setCourseOptions(data.map((course) => course.coursename));
+          // setCourseOptions(data.map((course) => course.coursename));
+          setCourseOptions(
+            data.map((course) => ({
+              courseId: course._id,
+              courseName: course.coursename,
+            }))
+          );
         } else {
           console.error("Error fetching courses:", response.statusText);
         }
@@ -141,7 +147,7 @@ export default function StudentAdmission() {
   };
   const handleCourseChange = (e) => {
     const { value } = e.target;
-
+    console.log(value, 434);
     setFormData((prevData) => ({
       ...prevData,
       branch: {
@@ -183,6 +189,7 @@ export default function StudentAdmission() {
     try {
       const response = await axios.post(
         "https://lms-backend-avhw.onrender.com/api/v1/admissions/create-admission",
+        // "http://localhost:8000/api/v1/admissions/create-admission",
         formData,
         {
           headers: {
@@ -244,7 +251,7 @@ export default function StudentAdmission() {
                   fullWidth
                 />
 
-                <NativeSelect
+                {/* <NativeSelect
                   size="small"
                   name="courseInterested"
                   value={formData.branch.course}
@@ -256,6 +263,21 @@ export default function StudentAdmission() {
                   {courseOptions.map((course, index) => (
                     <option key={index} value={course}>
                       {course}
+                    </option>
+                  ))}
+                </NativeSelect> */}
+                <NativeSelect
+                  size="small"
+                  name="courseInterested"
+                  value={formData.branch.course}
+                  onChange={handleCourseChange}
+                  fullWidth
+                  style={{ width: "100%", margin: "0.5rem" }}
+                >
+                  <option>Select Course Interested</option>
+                  {courseOptions.map((course) => (
+                    <option key={course.courseId} value={course.courseId}>
+                      {course.courseName}
                     </option>
                   ))}
                 </NativeSelect>
@@ -551,6 +573,7 @@ export default function StudentAdmission() {
                   onChange={handleEduChange}
                   label="SSC Percentage"
                   type="Number"
+                  inputProps={{ min: 0, max: 100 }}
                   fullWidth
                 />
 
@@ -598,6 +621,7 @@ export default function StudentAdmission() {
                   value={formData.education.hsc.percentage}
                   onChange={handleEduChange}
                   label="HSC percentage"
+                  inputProps={{ min: 0, max: 100 }}
                   type="Number"
                   fullWidth
                 />
@@ -647,6 +671,7 @@ export default function StudentAdmission() {
                   value={formData.education.graduation.percentage}
                   onChange={handleEduChange}
                   label="Graduation percentage"
+                  inputProps={{ min: 0, max: 100 }}
                   type="Number"
                   fullWidth
                 />
@@ -708,6 +733,7 @@ export default function StudentAdmission() {
                   value={formData.education.postGraduation.percentage}
                   onChange={handleEduChange}
                   label="Post-Graduation percentage"
+                  inputProps={{ min: 0, max: 100 }}
                   type="Number"
                   fullWidth
                 />

@@ -3,13 +3,60 @@ const mongoose = require("mongoose");
 // Controller to get all students
 exports.getAllStudents = async (req, res) => {
   try {
-    const students = await Student.find();
-    res.json(students);
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 3;
+    const skip = (page - 1) * limit;
+    const students = await Student.find()
+      .populate({
+        path: "applicationId",
+        model: "Admission",
+        populate: {
+          path: "branch.course",
+          model: "Course",
+        },
+      })
+      .populate("batch")
+      .skip(skip)
+      .limit(limit);
+    const totalCount = await Student.countDocuments();
+    const totalPages = Math.ceil(totalCount / limit);
+    const admissionsWithTotalCount = students.map((student) => ({
+      ...student.toObject(),
+      totalCount,
+    }));
+    const response = {
+      students,
+      totalPages,
+      currentPage: page,
+      totalCount,
+    };
+
+    res.json(response);
+    // res.json(students);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Controller to create a student
+// exports.createStudent = async (req, res) => {
+//   try {
+//     const existingStudent = await Student.findOne({
+//       applicationId: req.body.applicationId,
+//     });
+
+//     if (existingStudent) {
+//       return res.status(400).json("Student Already Exists");
+//     }
+
+//     const newStudent = new Student(req.body);
+//     const savedStudent = await newStudent.save();
+//     res.status(200).json({ Response: savedStudent });
+//   } catch (err) {
+//     console.log("error in creating student", err);
+//     res.status(500).json({ message: err });
+//   }
+// };
 // Controller to create a student
 exports.createStudent = async (req, res) => {
   try {
@@ -21,7 +68,18 @@ exports.createStudent = async (req, res) => {
       return res.status(400).json("Student Already Exists");
     }
 
-    const newStudent = new Student(req.body);
+    // Find the maximum roll number from existing students
+    const maxRollNoStudent = await Student.findOne().sort({ roll_no: -1 });
+    let roll_no = 1; // Default roll number if no existing students
+
+    if (maxRollNoStudent) {
+      roll_no = maxRollNoStudent.roll_no + 1; // Increment the roll number
+    }
+
+    // Add roll_no to the student data
+    const newStudentData = { ...req.body, roll_no };
+
+    const newStudent = new Student(newStudentData);
     const savedStudent = await newStudent.save();
     res.status(200).json({ Response: savedStudent });
   } catch (err) {
@@ -34,7 +92,9 @@ exports.createStudent = async (req, res) => {
 exports.getStudentById = async (req, res) => {
   try {
     console.log(req.params);
-    const student = await Student.findById(req.params.studentId);
+    const student = await Student.findById(req.params.studentId)
+      .populate("applicationId")
+      .populate("batch");
     if (!student) {
       return res.status(404).json({ message: "Student not found" });
     }

@@ -367,6 +367,35 @@ export default function SideBar() {
               <ListItemText primary="OMR" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
+          <ListItem
+            className="listItem"
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/newuser");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  color: "white",
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <AddCircleIcon />
+              </ListItemIcon>
+
+              <ListItemText primary="New User" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
 
           <ListItem
             className="listItem"

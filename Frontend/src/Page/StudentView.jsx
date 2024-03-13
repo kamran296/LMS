@@ -86,10 +86,11 @@ const StudentView = () => {
     try {
       const response = await axios.get(
         `https://lms-backend-avhw.onrender.com/api/v1/student/view/${studentId}`
+        // `http://localhost:8000/api/v1/student/view/${studentId}`
       );
       const data = await response.data;
       setStudentDetails(data);
-      console.log("data fetched succeessfully");
+      console.log("data fetched succeessfully", data);
     } catch (error) {
       console.log(error);
     }

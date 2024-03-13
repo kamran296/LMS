@@ -12,6 +12,8 @@ import { TextField } from "@mui/material";
 
 export default function StudentDetail() {
   const { pathname } = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   // Automatically scrolls to top whenever pathname changes
   useEffect(() => {
@@ -27,32 +29,35 @@ export default function StudentDetail() {
       navigate("/");
     }
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://lms-backend-hl4h.onrender.com/api/v1/student/getallstudents"
+        `https://lms-backend-hl4h.onrender.com/api/v1/student/getallstudents?page=${currentPage}&limit=3`
+        // `http://localhost:8000/api/v1/student/getallstudents?page=${currentPage}&limit=10`
       );
       const data = await response.data;
-      setData(data);
+      setData(data.students);
+      console.log(data.totalCount, "length");
+      const totalPages = Math.ceil(data.totalCount / 10);
+
+      setTotalPages(totalPages);
       console.log("Data represented successfully", data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // const handleAdmitButtonClick = (applicationId) => {
-  //   // Set the current applicationId when Admit button is clicked
-  //   setCurrApplicationId(applicationId);
-  //   setShowModal(true); // Show the modal
-  // };
-
   const handleViewButtonClick = (studentId) => {
     // Navigate to the StudentView page and pass studentId as part of the URL
     navigate(`/studentview/${studentId}`);
   };
   const [search, setSearch] = useState("");
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+    console.log(currentPage);
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <SideBar />
@@ -73,6 +78,7 @@ export default function StudentDetail() {
             <MDBTableHead>
               <tr>
                 <th>Sr No</th>
+                <th>Roll No</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 {/* <th scope="col">Parent Phone</th> */}
@@ -95,6 +101,7 @@ export default function StudentDetail() {
                 .map((item, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
+                    <td>{item.roll_no} </td>
                     <td
                       style={{ textDecoration: "underline", cursor: "pointer" }}
                       onClick={() => handleViewButtonClick(item._id)}
@@ -103,22 +110,27 @@ export default function StudentDetail() {
                       {item.applicationId.personalInfo.middleName}{" "}
                       {item.applicationId.personalInfo.lastName}
                     </td>
+
                     <td>{item.applicationId.personalInfo.email}</td>
                     <td>{item.applicationId.parent.phone}</td>
-                    <td>{item.applicationId.branch.course}</td>
+                    <td>{item.applicationId.branch.course.coursename}</td>
                     <td>{item.batch.batchname}</td>
-                    {/* <td>
-                      <Button
-                        onClick={() => handleViewButtonClick(item._id)}
-                        variant="success"
-                      >
-                        View
-                      </Button>
-                    </td> */}
                   </tr>
                 ))}
             </MDBTableBody>
           </MDBTable>
+          {/* Pagination buttons */}
+          <div>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <Button
+                key={index}
+                onClick={() => handlePageClick(index + 1)}
+                style={{ marginLeft: "5px" }}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
         </div>
       </Box>
     </Box>

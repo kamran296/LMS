@@ -38,19 +38,19 @@ const markSchema = new mongoose.Schema({
 
 const studentSchema = new mongoose.Schema({
   applicationId: {
-    // type: mongoose.Schema.Types.ObjectId,
-    type: Object,
-    // ref: "Admission",
+    type: mongoose.Schema.Types.ObjectId,
+    // type: Object,
+    ref: "Admission",
     required: true,
   },
   batch: {
-    // type: mongoose.Schema.Types.ObjectId,
-    type: Object,
-    // ref: "Batch",
+    type: mongoose.Schema.Types.ObjectId,
+    // type: Object,
+    ref: "Batch",
     required: true,
   },
   roll_no: {
-    type: String,
+    type: Number,
     required: true,
   },
   fees: [feeSchema],

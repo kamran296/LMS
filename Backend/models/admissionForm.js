@@ -10,7 +10,7 @@ const BranchSchema = new mongoose.Schema({
     required: true,
   },
   course: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
   },
 });

@@ -13,6 +13,7 @@ import BatchList from "./Page/BatchList";
 import AdmissionStatus from "./Page/AdmissionStatus";
 import StudentView from "./Page/StudentView";
 import OMR from "./Page/Omr";
+import NewUser from "./Page/NewUser";
 export default function App() {
   return (
     <>
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/addproduct" element={<AddProduct />}></Route>
           <Route path="/studentview/:studentId" element={<StudentView />} />
           <Route path="/upload" element={<OMR />} />
+          <Route path="/newuser" element={<NewUser />} />
         </Routes>
       </BrowserRouter>
     </>

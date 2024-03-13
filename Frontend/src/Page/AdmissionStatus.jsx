@@ -17,38 +17,49 @@ export default function AdmissionStatus() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [admissionsData, setAdmissionsData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [currApplicationId, setCurrApplicationId] = useState("");
+  const [amount, setAmount] = useState("");
   const navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://lms-backend-avhw.onrender.com/api/v1/admissions/getalladmissions?page=${currentPage}&limit=3`
+        // `http://localhost:8000/api/v1/admissions/getalladmissions?page=${currentPage}&limit=3`
+      );
+      const data = await response.json();
+      console.log(data.admissions, 123);
+      setAdmissionsData(data.admissions);
+      console.log(data.totalCount, "length");
+      const totalPages = Math.ceil(data.totalCount / 3);
+
+      setTotalPages(totalPages);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/");
     }
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://lms-backend-avhw.onrender.com/api/v1/admissions/getalladmissions"
-        );
-        const data = await response.json();
-        console.log(data, 123);
-        setAdmissionsData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
-  const handleAdmitButtonClick = (studentId) => {
+  const handleAdmitButtonClick = (studentId, fees) => {
     console.log(studentId);
     setSelectedStudentId(studentId);
     setShowModal(true);
     setCurrApplicationId(studentId);
     console.log(currApplicationId, 1234);
+    setAmount(fees);
+    console.log(amount, 33);
   };
 
   const handleAdmit = async ({ fees }) => {
@@ -60,6 +71,10 @@ export default function AdmissionStatus() {
     setSelectedStudentId(null);
   };
   const [search, setSearch] = useState("");
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+    console.log(currentPage);
+  };
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -128,12 +143,17 @@ export default function AdmissionStatus() {
 
                       <td>{item.personalInfo.phone}</td>
 
-                      <td>{item.branch.course}</td>
+                      <td>{item.branch.course.coursename}</td>
 
                       <td>
                         <Button
                           variant="success"
-                          onClick={() => handleAdmitButtonClick(item._id)}
+                          onClick={() =>
+                            handleAdmitButtonClick(
+                              item._id,
+                              item.branch.course.fees
+                            )
+                          }
                           disabled={item.status === "Admitted"}
                           style={{
                             backgroundColor:
@@ -153,6 +173,18 @@ export default function AdmissionStatus() {
                   ))}
               </MDBTableBody>
             </MDBTable>
+            {/* Pagination buttons */}
+            <div>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <Button
+                  key={index}
+                  onClick={() => handlePageClick(index + 1)}
+                  style={{ marginLeft: "5px" }}
+                >
+                  {index + 1}
+                </Button>
+              ))}
+            </div>
           </div>
         </Box>
       </Box>
@@ -162,6 +194,7 @@ export default function AdmissionStatus() {
         handleClose={() => setShowModal(false)}
         handleAdmit={handleAdmit}
         applicationId={currApplicationId}
+        amount={amount}
       />
     </>
   );
