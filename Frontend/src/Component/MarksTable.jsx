@@ -54,7 +54,7 @@ function MarksTable({ csvData }) {
 
     try {
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/student/addmarks",
+        "https://lms-1-9sat.onrender.com/api/v1/student/addmarks",
         // "http://localhost:8000/api/v1/student/addmarks",
         formData
       );
@@ -173,7 +173,7 @@ export default MarksTable;
 
 //     try {
 //       const response = await axios.post(
-//         "https://lms-backend-avhw.onrender.com/api/v1/student/addmarks",
+//         "https://lms-1-9sat.onrender.com/api/v1/student/addmarks",
 //         { formData, testName }
 //       );
 //       alert("Marks Added Successfully!!");

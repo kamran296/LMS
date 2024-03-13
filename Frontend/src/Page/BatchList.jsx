@@ -25,7 +25,7 @@ export default function BatchList() {
           navigate("/");
         }
         const response = await fetch(
-          "https://lms-backend-avhw.onrender.com/api/v1/batch/getallbatches"
+          "https://lms-1-9sat.onrender.com/api/v1/batch/getallbatches"
         );
         const data = await response.json();
 
@@ -33,7 +33,7 @@ export default function BatchList() {
         const batchesWithTeacherDetails = await Promise.all(
           data.map(async (batch) => {
             const teacherResponse = await fetch(
-              `https://lms-backend-avhw.onrender.com/api/v1/teacher/getteacher/${batch.teacher}`
+              `https://lms-1-9sat.onrender.com/api/v1/teacher/getteacher/${batch.teacher}`
             );
             const teacherData = await teacherResponse.json();
             return {

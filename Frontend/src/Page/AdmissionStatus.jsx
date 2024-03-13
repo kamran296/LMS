@@ -29,7 +29,7 @@ export default function AdmissionStatus() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://lms-backend-avhw.onrender.com/api/v1/admissions/getalladmissions?page=${currentPage}&limit=3`
+        `https://lms-1-9sat.onrender.com/api/v1/admissions/getalladmissions?page=${currentPage}&limit=3`
         // `http://localhost:8000/api/v1/admissions/getalladmissions?page=${currentPage}&limit=3`
       );
       const data = await response.json();

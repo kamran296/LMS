@@ -68,7 +68,7 @@ const StudentView = () => {
   const fetchAttendanceData = async () => {
     try {
       const response = await axios.get(
-        `https://lms-backend-avhw.onrender.com/api/v1/attendance/${studentId}`,
+        `https://lms-1-9sat.onrender.com/api/v1/attendance/${studentId}`,
         {
           headers: {
             authToken: authToken,
@@ -85,7 +85,7 @@ const StudentView = () => {
   const fetchDetails = async (req, res) => {
     try {
       const response = await axios.get(
-        `https://lms-backend-avhw.onrender.com/api/v1/student/view/${studentId}`
+        `https://lms-1-9sat.onrender.com/api/v1/student/view/${studentId}`
         // `http://localhost:8000/api/v1/student/view/${studentId}`
       );
       const data = await response.data;
@@ -152,7 +152,7 @@ const StudentView = () => {
         image: image,
       }));
       const response = await axios.post(
-        `https://lms-backend-avhw.onrender.com/api/v1/student/addfees/${studentId}`,
+        `https://lms-1-9sat.onrender.com/api/v1/student/addfees/${studentId}`,
         formData
       );
       alert("fees added successfully");

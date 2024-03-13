@@ -9,7 +9,7 @@ const NewUser = () => {
   const handleSubmit = async (req, res) => {
     try {
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/createadmin",
+        "https://lms-1-9sat.onrender.com/api/v1/createadmin",
         // "http://localhost:8000/api/v1/login/createadmin",
         { username, password }
       );

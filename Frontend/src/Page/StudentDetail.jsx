@@ -34,7 +34,7 @@ export default function StudentDetail() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://lms-backend-hl4h.onrender.com/api/v1/student/getallstudents?page=${currentPage}&limit=3`
+        `https://lms-1-9sat.onrender.com/api/v1/student/getallstudents?page=${currentPage}&limit=3`
         // `http://localhost:8000/api/v1/student/getallstudents?page=${currentPage}&limit=10`
       );
       const data = await response.data;
@@ -90,7 +90,7 @@ export default function StudentDetail() {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {data
+              {/* {data
                 .filter((item) => {
                   return search.toLowerCase() === ""
                     ? item
@@ -116,7 +116,46 @@ export default function StudentDetail() {
                     <td>{item.applicationId.branch.course.coursename}</td>
                     <td>{item.batch.batchname}</td>
                   </tr>
-                ))}
+                ))} */}
+              {data &&
+                data
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.applicationId.personalInfo.firstName
+                          .toLowerCase()
+                          .includes(search);
+                  })
+                  .map((item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.roll_no} </td>
+                      <td
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleViewButtonClick(item._id)}
+                      >
+                        {item.applicationId.personalInfo.firstName}{" "}
+                        {item.applicationId.personalInfo.middleName}{" "}
+                        {item.applicationId.personalInfo.lastName}
+                      </td>
+                      <td>{item.applicationId.personalInfo.email}</td>
+                      <td>{item.applicationId.parent.phone}</td>
+                      <td>{item.applicationId.branch.course.coursename}</td>
+                      <td>{item.batch.batchname}</td>
+                      {/* Render marks for each student */}
+                      <td>
+                        {item.marks.map((mark, index) => (
+                          <div key={index}>
+                            Test {index + 1}:{" "}
+                            {parseFloat(mark.marks.replace(/"/g, ""))}
+                          </div>
+                        ))}
+                      </td>
+                    </tr>
+                  ))}
             </MDBTableBody>
           </MDBTable>
           {/* Pagination buttons */}

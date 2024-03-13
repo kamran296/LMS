@@ -34,7 +34,7 @@ export default function CreateCourse() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/course/create-course",
+        "https://lms-1-9sat.onrender.com/api/v1/course/create-course",
         {
           coursename: coursename,
           desc: description,

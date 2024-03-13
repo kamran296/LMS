@@ -127,7 +127,7 @@ const StudentAdmitModal = ({
       fees: [
         ...prevFormData.fees,
         {
-          amount: "",
+          amount: amount,
           paidamount: "",
           date: "",
           status: "",
@@ -166,7 +166,7 @@ const StudentAdmitModal = ({
       // Send form data to the API endpoint
 
       const response = await axios.post(
-        "https://lms-backend-avhw.onrender.com/api/v1/student/create-student",
+        "https://lms-1-9sat.onrender.com/api/v1/student/create-student",
         // "http://localhost:8000/api/v1/student/create-student",
         formData
       );
@@ -258,8 +258,8 @@ const StudentAdmitModal = ({
                   type="text"
                   name={`fees.${index}.amount`}
                   label="Amount"
-                  // value={amount}
-                  value={fee.amount || amount}
+                  value={amount}
+                  // value={fee.amount || amount}
                   onChange={(e) => handleInputChange(e, index)}
                 />
                 <TextField
@@ -272,7 +272,7 @@ const StudentAdmitModal = ({
                   label="Paid Amount"
                   value={fee.paidamount}
                   inputProps={{ min: 0, max: amount }}
-                  onChange={(e) => handleInputChange(e, index)}
+                  // onChange={(e) => handleInputChange(e, index)}
                 />
                 <TextField
                   style={{ margin: "0.5rem", width: "45%" }}
