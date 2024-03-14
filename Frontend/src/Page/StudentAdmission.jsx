@@ -8,7 +8,8 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
-
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 export default function StudentAdmission() {
   const { pathname } = useLocation();
 
@@ -79,7 +80,8 @@ export default function StudentAdmission() {
   });
 
   const [courseOptions, setCourseOptions] = useState([]);
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/");
@@ -201,8 +203,9 @@ export default function StudentAdmission() {
 
       if (response.status === 201) {
         const data = response.data;
-        alert("Admission created successfully");
-        // Optionally, you can reset the form or perform other actions after successful submission
+        setShowAlert(true);
+        setMessage("Admission created successfully");
+        // alert("Admission created successfully");
       } else if (response.status === 400) {
         const errorData = response.data;
         console.error("Error: Student already exists", errorData.message);
@@ -220,6 +223,15 @@ export default function StudentAdmission() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+        {showAlert && (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+          >
+            {message}
+          </Alert>
+        )}
         <h1>Admission Form</h1>
         <div className="formBox">
           <form onSubmit={handleSubmit} className="">

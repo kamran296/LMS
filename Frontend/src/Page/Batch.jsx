@@ -9,6 +9,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 export default function Batch() {
   const { pathname } = useLocation();
 
@@ -22,6 +24,8 @@ export default function Batch() {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [token, setToken] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
@@ -87,7 +91,8 @@ export default function Batch() {
         }
       );
       if (response.status === 201) {
-        alert("Batch created successfully!!");
+        setShowAlert(true);
+        setMessage("Batch created successfully!!");
       } else {
         // Handle error, e.g., show an error message
         console.error("Error registering teacher:", response.statusText);
@@ -102,6 +107,15 @@ export default function Batch() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+        {showAlert && (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+          >
+            {message}
+          </Alert>
+        )}
         <h1>Batch Section</h1>
         <div className="batchForm">
           <h3>Create Batch according to course</h3>

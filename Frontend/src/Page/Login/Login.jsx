@@ -3,11 +3,14 @@ import axios from "axios";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 
 function Login() {
   const [username, setUsername] = useState("");
-  const [password, setpassword] = useState("");
-  const [, setMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false); // State to manage alert visibility
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -21,26 +24,33 @@ function Login() {
       );
 
       if (response.data.success) {
-        // Store the authentication token in localStorage or a state management solution
-        console.log(username, password);
         localStorage.setItem("authToken", response.data.authToken);
-
-        setMessage(response.data.message);
-        alert("Successfully Logged in");
-
-        // Redirect to the dashboard page or any other authenticated route
-        navigate("/dashboard");
+        setMessage("successfully signed in!!");
+        setShowAlert(true); // Show alert
+        // Delay navigation to ensure the alert is displayed before redirection
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 4000); // Adjust the delay time as needed
       } else {
         setMessage(response.data.message);
       }
     } catch (error) {
       console.log(username, password);
-      alert("wrong credentials");
+      alert("Wrong credentials");
     }
   };
 
   return (
     <>
+      {showAlert && (
+        <Alert
+          icon={<CheckIcon fontSize="inherit" />}
+          severity="success"
+          onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+        >
+          {message}
+        </Alert>
+      )}
       <h1 className="mainTitle">Coding Circle Academy</h1>
       <div fluid className="p-3 mainContainer">
         <div className="subContainer">
@@ -67,7 +77,7 @@ function Login() {
               type="password"
               size="lg"
               value={password}
-              onChange={(e) => setpassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <MDBBtn onClick={handleLogin} id="SiginBtn">
               Sign In

@@ -9,6 +9,8 @@ import {
   MDBTabsPane,
   MDBContainer,
 } from "mdb-react-ui-kit";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import DownloadIcon from "@mui/icons-material/Download";
 import { useParams } from "react-router-dom";
@@ -143,7 +145,8 @@ const StudentView = () => {
       console.log("no file selected");
     }
   };
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -155,7 +158,9 @@ const StudentView = () => {
         `https://lms-1-9sat.onrender.com/api/v1/student/addfees/${studentId}`,
         formData
       );
-      alert("fees added successfully");
+      setShowAlert(true);
+      setMessage("student added successfully");
+      // alert("fees added successfully");
       console.log(response.data);
       // Handle success, update UI, etc.
     } catch (error) {
@@ -169,6 +174,15 @@ const StudentView = () => {
       <Box sx={{ display: "flex" }}>
         <SideBar />
         <div className="studentViewBox">
+          {showAlert && (
+            <Alert
+              icon={<CheckIcon fontSize="inherit" />}
+              severity="success"
+              onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+            >
+              {message}
+            </Alert>
+          )}
           <MDBTabs pills className="mb-3 ">
             <MDBTabsItem>
               <MDBTabsLink

@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import { Alert } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 export default function CreateCourse() {
   const { pathname } = useLocation();
 
@@ -19,6 +21,8 @@ export default function CreateCourse() {
   const [duration, setDuration] = useState("");
   const [fees, setFees] = useState("");
   const [token, setToken] = useState();
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
@@ -48,7 +52,9 @@ export default function CreateCourse() {
         }
       );
       if (response.status === 201) {
-        alert("course created successfully!!");
+        setShowAlert(true);
+        setMessage("course created successfully!!");
+        // alert("course created successfully!!");
       } else {
         // Handle error, e.g., show an error message
         console.error("Error registering course:", response.statusText);
@@ -71,6 +77,15 @@ export default function CreateCourse() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+        {showAlert && (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+          >
+            {message}
+          </Alert>
+        )}
         <div className="mainOmrBox">
           <h1>Course Registration Process</h1>
           <div className="createCourseForm">

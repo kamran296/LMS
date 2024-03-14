@@ -7,6 +7,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 
 export default function TeacherRegistration() {
   const { pathname } = useLocation();
@@ -16,6 +18,8 @@ export default function TeacherRegistration() {
     window.scrollTo(0, 0);
   }, [pathname]);
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -56,7 +60,9 @@ export default function TeacherRegistration() {
         const data = await response.json();
         // Handle success, e.g., show a success message
         console.log("Teacher registered successfully:", data);
-        alert("Teacher Added Successfully!!");
+        setShowAlert(true);
+        setMessage("Teacher Added Successfully!!");
+        // alert("Teacher Added Successfully!!");
       } else {
         // Handle error, e.g., show an error message
         alert("All fields are mandatory ");
@@ -71,6 +77,15 @@ export default function TeacherRegistration() {
     <Box sx={{ display: "flex" }}>
       <SideBar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
+        {showAlert && (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            onClose={() => setShowAlert(false)} // Close the alert when user clicks on close icon
+          >
+            {message}
+          </Alert>
+        )}
         <div className="mainRegBox">
           <h1>Teacher Registration </h1>
           <div className="teacherregForm">
